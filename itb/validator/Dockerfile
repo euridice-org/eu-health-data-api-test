@@ -3,7 +3,7 @@
 # release is mutable, so reject changed bytes until the pin is reviewed.
 FROM eclipse-temurin:17-jre@sha256:2a996a534890f1bee252fab23a0c01e773e9e1dc0e4700e8f0f6a2697c6cbf76
 WORKDIR /app
-ADD --checksum=sha256:2c1f7a66dadaccd20e78114aa59a34ba1a3325999c44a1c04946d0d791e096ec https://github.com/costateixeira/org.hl7.fhir.core/releases/download/wip/validator_cli.jar /app/validator_cli.jar
+ADD --checksum=sha256:1dcc7d917d0efa97bc2c889813bda881e2735dc8195e4af9bd34184ad7119731 https://github.com/costateixeira/org.hl7.fhir.core/releases/download/wip/validator_cli.jar /app/validator_cli.jar
 ENV JAVA_TOOL_OPTIONS=-Xmx4g
 EXPOSE 8080
 ENTRYPOINT ["java", "-jar", "/app/validator_cli.jar"]
