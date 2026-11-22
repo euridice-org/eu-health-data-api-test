@@ -6,12 +6,14 @@
 // depends on which side of the exchange the system under test is on, because
 // the same path (Patient.search.identifier) implements a provider requirement
 // when a server is tested and a consumer requirement when a client is tested.
+// A feature that tests neither says so with a @side tag (@side:producer).
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 export const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 export const featuresDir = path.join(root, 'input/testing/gherkin');
+export const contentDir = path.join(root, 'input/testing/content');
 export const traceabilityDir = path.join(root, 'input/testing/traceability');
 
 export function loadRequirements(file = path.join(traceabilityDir, 'requirements.json')) {
@@ -22,8 +24,8 @@ export function loadRequirements(file = path.join(traceabilityDir, 'requirements
 export function parseFeature(text, filename = 'feature') {
   const sut = text.match(/Given\s+(\w+) is the system under test( at "[^"]*")?/);
   if (!sut) throw new Error(`${filename}: no system under test`);
-  // A tested server is addressed by URL, a tested client is not.
-  const side = sut[2] ? 'server' : 'client';
+  // A tested server is addressed by URL, a tested client is not; @side overrides both.
+  const side = text.match(/^@.*@side:(\w+)/m)?.[1] ?? (sut[2] ? 'server' : 'client');
   const scenarios = [];
   let covers = null;
   for (const line of text.split('\n')) {
@@ -55,12 +57,14 @@ export function requirementsFor(scenario, side, table) {
   return ids;
 }
 
-export function buildMatrix({ dir = featuresDir, table = loadRequirements() } = {}) {
+export function buildMatrix({ dirs = [featuresDir, contentDir], table = loadRequirements() } = {}) {
   const scenarios = {};
   const requirements = Object.fromEntries(Object.entries(table.requirements)
     .map(([id, requirement]) => [id, { ...requirement, scenarios: [] }]));
-  for (const filename of fs.readdirSync(dir).filter(f => f.endsWith('.feature')).sort()) {
-    const feature = parseFeature(fs.readFileSync(path.join(dir, filename), 'utf8'), filename);
+  const files = dirs.flatMap(dir => fs.readdirSync(dir).filter(f => f.endsWith('.feature')).sort().map(f => path.join(dir, f)));
+  for (const file of files) {
+    const filename = path.basename(file);
+    const feature = parseFeature(fs.readFileSync(file, 'utf8'), filename);
     for (const scenario of feature.scenarios) {
       const ids = requirementsFor(scenario, feature.side, table);
       scenarios[scenario.id] = { feature: filename, actor: feature.actor, side: feature.side,

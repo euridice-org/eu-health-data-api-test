@@ -156,7 +156,11 @@
       "actor": "Any system providing data",
       "basis": "EHDS Annex II 2.1, 2.4",
       "text": "The EHR system SHALL be capable of providing priority category data that conforms to the EEHRxF data format.",
-      "scenarios": []
+      "scenarios": [
+        "cnt-001",
+        "cnt-002",
+        "cnt-003"
+      ]
     },
     "api-consumer-data": {
       "actor": "Any system receiving data",
@@ -1009,6 +1013,42 @@
       ],
       "requirements": [
         "api-backendEncryption"
+      ]
+    },
+    "cnt-001": {
+      "feature": "eu-api-content-producer.feature",
+      "actor": "ContentProducer",
+      "side": "producer",
+      "title": "A Patient Summary document conforms to the European Patient Summary Bundle profile",
+      "covers": [
+        "content.patient-summary"
+      ],
+      "requirements": [
+        "api-producer-data"
+      ]
+    },
+    "cnt-002": {
+      "feature": "eu-api-content-producer.feature",
+      "actor": "ContentProducer",
+      "side": "producer",
+      "title": "A Laboratory Report document conforms to the European Laboratory Report Bundle profile",
+      "covers": [
+        "content.laboratory-report"
+      ],
+      "requirements": [
+        "api-producer-data"
+      ]
+    },
+    "cnt-003": {
+      "feature": "eu-api-content-producer.feature",
+      "actor": "ContentProducer",
+      "side": "producer",
+      "title": "A Hospital Discharge Report document conforms to the European Discharge Report Bundle profile",
+      "covers": [
+        "content.discharge-report"
+      ],
+      "requirements": [
+        "api-producer-data"
       ]
     }
   }

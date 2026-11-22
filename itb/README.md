@@ -3,8 +3,9 @@
 This directory runs the European Commission's stock ITB 1.30.2 for this IG,
 following the Compose and REST bootstrap approach in
 [trifork/itb-dk-extensions](https://github.com/trifork/itb-dk-extensions).
-It imports every `input/testing/gherkin/*.feature` as its own suite: currently
-six suites and 67 cases. The original features remain the source of truth.
+It imports every `input/testing/gherkin/*.feature` and `input/testing/content/*.feature`
+as its own suite: currently seven suites and 70 cases. The original features remain the
+source of truth.
 
 The core scripts, validator, UI adaptation and regression checks are independent
 of the implementation under test. The bootstrap provenance above does not imply
@@ -46,12 +47,13 @@ then its conformance statements:
 | GroupedProvider | 13 |
 | ResourceAccessProvider | 18 |
 | ResourceConsumer | 7 |
+| ContentProducer | 3 |
 
 `GroupedProvider` is the SUT identifier used inside the grouped publisher/access
 provider feature; its descriptive `@actor` tag is `DocumentPublisherAccessProvider`.
 
 Startup compiles, imports and assigns the tests. It does **not** execute the
-67 conformance cases or establish compliance. They are demonstration tests;
+70 conformance cases or establish compliance. They are demonstration tests;
 their clinical/specification coverage has not been validated by this integration.
 
 ## Inspect response bodies
@@ -148,6 +150,43 @@ Optional ports: add `ITB_PORT=9001` and/or `ITB_CALLBACK_PORT=8081` to `itb/.env
 before startup if the defaults are occupied. Compose uses a dedicated project
 name and volumes and does not claim fixed container names.
 
+## Content validation
+
+`ContentProducer` (`cnt-001` to `cnt-003`, from `input/testing/content/`) checks that a
+document your system produced conforms to the HL7 Europe content IG's Bundle profile for
+Patient Summary, Laboratory Report or Hospital Discharge Report. Run a case from the UI and
+paste the document, as FHIR JSON, when prompted: the validator loads the content IG and
+checks it with slicing errors counted. Use synthetic data only.
+
+[The fixtures](../input/testing/content/fixtures/content-v1/README.md) hold a valid document
+and six invalid ones per category, each invalid one a single documented change. Paste them
+to see what the test checks. The valid and invalid files are proved against the validator,
+not assumed, with the ITB validator running:
+
+```sh
+docker run --rm --network eu-health-data-api-itb_default \
+  --mount type=bind,source="$PWD",target=/work -w /work node:22-alpine \
+  node scripts/validate-content-fixtures.mjs
+```
+
+Things to know:
+
+- **The prompt cannot be pre-answered over the REST API.** A session started through
+  `POST /tests/start` fails at the paste prompt even with an `inputMapping` entry named after
+  it ("Required request elements were found that were not provided with corresponding
+  inputs", ITB 1.30.2). Run these cases from the UI. This was tested on the content cases
+  only; the other cases that prompt for a value compile to the same kind of step. Reading
+  values from a configuration property, as `baseUrl` does, works.
+- **A document is pasted, not uploaded.** The dialect's upload step yields a binary value
+  and has no decoding step, so it cannot feed the validator.
+- **Large documents are slow.** The validator had not finished a 142 KB Patient Summary
+  example after twelve minutes at full CPU, and it keeps working after the caller gives up
+  (restart it to stop). Documents of 7 to 60 KB took 3 to 12 seconds, and the fixtures are
+  7 to 27 KB. Imaging reports are not covered for that reason.
+- **Terminology.** The validator checks codes against its terminology server (tx.fhir.org by
+  default), so the codes in a pasted document leave your machine. That is why only synthetic
+  data may be used.
+
 ## Requirements on each test case
 
 Every compiled test case's description ends with the requirement it implements,
@@ -212,6 +251,7 @@ The validator's package cache and the ITB database/repository use named volumes.
 | `users.mjs` | Local login provisioning and UI access verification |
 | `configure.mjs` | Set or clear a server actor's `baseUrl` without editing a suite |
 | `release.mjs` | Versioned, checksummed suite archives for a test bed that deploys them |
+| `../scripts/validate-content-fixtures.mjs` | Proves the content fixtures pass or fail as their manifest says |
 | `test-compiled-suites.mjs` | Checks on the compiled suites: parameter, requirement lines, reproducibility |
 | `smoke.mjs`, `tests/smoke.feature` | Positive and negative engine integration checks |
 | `test-search-assertions.mjs` | Server-independent FHIRPath regression checks using shared fixtures |

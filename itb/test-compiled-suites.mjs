@@ -7,18 +7,20 @@ import path from 'node:path';
 import { createHash } from 'node:crypto';
 import { execFileSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
-import { featuresDir, parseFeature } from '../scripts/lib/traceability.mjs';
+import { featuresDir, contentDir, parseFeature } from '../scripts/lib/traceability.mjs';
 
 const root = path.dirname(fileURLToPath(import.meta.url));
 const build = path.join(root, 'build');
 const manifest = JSON.parse(fs.readFileSync(path.join(build, 'manifest.json'), 'utf8'));
 const read = file => fs.readFileSync(file, 'utf8');
 const xmlFiles = dir => fs.readdirSync(dir).filter(f => f.endsWith('.xml')).map(f => path.join(dir, f));
+const featureDirs = [featuresDir, contentDir];
+const featureFile = name => featureDirs.map(dir => path.join(dir, name)).find(file => fs.existsSync(file));
 const sha = file => createHash('sha256').update(fs.readFileSync(file)).digest('hex');
 
 test('a server actor reads its endpoint from the conformance statement and declares the parameter', () => {
   for (const suite of manifest) {
-    const feature = parseFeature(read(path.join(featuresDir, suite.feature)), suite.feature);
+    const feature = parseFeature(read(featureFile(suite.feature)), suite.feature);
     const dir = path.join(build, path.dirname(suite.archive));
     const files = xmlFiles(dir);
     const testSuite = files.map(read).find(text => text.startsWith("<?xml version='1.0' encoding='utf-8'?>\n<testsuite"));
@@ -49,7 +51,8 @@ test('every test case says which requirements it implements', () => {
 });
 
 test('compiling twice gives byte-identical suite archives and leaves the source features untouched', () => {
-  const features = () => fs.readdirSync(featuresDir).sort().map(f => sha(path.join(featuresDir, f)));
+  const features = () => featureDirs.flatMap(dir =>
+    fs.readdirSync(dir).filter(f => f.endsWith('.feature')).sort().map(f => sha(path.join(dir, f))));
   const archives = () => manifest.map(suite => sha(path.join(build, suite.archive)));
   const [archivesBefore, featuresBefore] = [archives(), features()];
   execFileSync(process.execPath, [path.join(root, 'compile.mjs')], { cwd: root, stdio: 'ignore' });

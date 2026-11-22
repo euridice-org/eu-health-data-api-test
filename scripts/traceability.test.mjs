@@ -34,11 +34,12 @@ test('an unmapped path, a missing side and an unknown requirement all fail loudl
 
 test('every shipped scenario is traced, and the known gaps are reported rather than hidden', () => {
   const matrix = buildMatrix();
-  assert.equal(Object.keys(matrix.scenarios).length, 67);
+  assert.equal(Object.keys(matrix.scenarios).length, 70);
   for (const [id, scenario] of Object.entries(matrix.scenarios)) assert.ok(scenario.covers.length, `${id} has no @covers`);
   const untested = Object.entries(matrix.requirements).filter(([, r]) => !r.scenarios.length).map(([id]) => id);
   assert.deepEqual(untested.sort(), ['api-consumer-backendAuthPresentToken', 'api-consumer-data', 'api-consumer-general',
-    'api-producer-data', 'api-provider-backendAuthDiscovery', 'api-provider-backendAuthProvideToken'].sort());
+    'api-provider-backendAuthDiscovery', 'api-provider-backendAuthProvideToken'].sort());
+  assert.deepEqual(matrix.requirements['api-producer-data'].scenarios, ['cnt-001', 'cnt-002', 'cnt-003']);
 });
 
 test('the line shown on a test case names requirement, basis and source', () => {

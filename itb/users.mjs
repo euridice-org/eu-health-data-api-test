@@ -85,6 +85,6 @@ if (visible.length !== manifest.length || manifest.some(suite => {
   const result = visible.find(item => item.name === suite.actor)?.results;
   return !result || result.undefined + result.failed + result.completed !== suite.testCases.length;
 })) {
-  throw new Error('Expected six visible conformance statements');
+  throw new Error('Expected one visible conformance statement per suite, each with all its test cases');
 }
 console.log(`Verified login and assigned tests for ${users.username}. Credentials: ${file}`);

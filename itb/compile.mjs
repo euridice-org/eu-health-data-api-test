@@ -2,10 +2,9 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { execFileSync } from 'node:child_process';
-import { buildMatrix, describeScenario, loadRequirements } from '../scripts/lib/traceability.mjs';
+import { buildMatrix, describeScenario, loadRequirements, featuresDir, contentDir } from '../scripts/lib/traceability.mjs';
 
 const root = path.dirname(fileURLToPath(import.meta.url));
-const features = path.resolve(root, '../input/testing/gherkin');
 const build = path.join(root, 'build');
 const cli = path.join(root, 'node_modules/@opentestbed/otb-gherkin/bin/otb-gherkin.mjs');
 fs.mkdirSync(build, { recursive: true });
@@ -18,8 +17,10 @@ execFileSync(process.execPath, [cli, 'dialects', '--installed', '--out', path.jo
 const requirementsTable = loadRequirements();
 const matrix = buildMatrix({ table: requirementsTable });
 const manifest = [];
-for (const filename of fs.readdirSync(features).filter(f => f.endsWith('.feature')).sort()) {
-  const source = path.join(features, filename);
+const sources = [featuresDir, contentDir].flatMap(dir =>
+  fs.readdirSync(dir).filter(f => f.endsWith('.feature')).sort().map(f => path.join(dir, f)));
+for (const source of sources) {
+  const filename = path.basename(source);
   const text = fs.readFileSync(source, 'utf8');
   // The grouped feature's descriptive @actor tag differs from its actual
   // Gherkin SUT identifier (GroupedProvider), which ITB uses for assignment.

@@ -3,7 +3,7 @@
   "status": "draft: the covers mapping is an unreviewed judgement and must be confirmed by the specification owners",
   "specification": "hl7.fhir.eu.health-data-api@1.0.0-ballot",
   "source": "https://build.fhir.org/ig/euridice-org/eu-health-data-api/en/regulatoryAnchors.html",
-  "note": "Requirement IDs are the Xt-EHR D5.1 IDs the specification itself uses. The EHDS implementing acts under Articles 15 and 36 (still in draft) will define the final requirements: when they do, change only this table and the covers mapping. D5.1 also has 6 logging-component and 5 general requirements that the specification leaves out of scope; they are not listed here and have no tests in this repository.",
+  "note": "Requirement IDs are the Xt-EHR D5.1 IDs the specification itself uses. The EHDS implementing acts under Articles 15 and 36 (still in draft) will define the final requirements: when they do, change only this table and the covers mapping. D5.1 also has 6 logging-component and 5 general requirements that the specification leaves out of scope; they are not listed here and have no tests in this repository. Three sides exist: server and client (the system under test is called or calls) and producer (it produces a document that is validated).",
   "requirements": {
     "api-provider-general": {
       "actor": "Access Provider",
@@ -95,6 +95,9 @@
     "security.scope": { "server": ["api-provider-backendAuthRequireToken"] },
     "security.smart-backend-services": { "client": ["api-consumer-backendAuthObtainToken"] },
     "security.tls": { "server": ["api-backendEncryption"], "client": ["api-backendEncryption"] },
+    "content.patient-summary": { "producer": ["api-producer-data"] },
+    "content.laboratory-report": { "producer": ["api-producer-data"] },
+    "content.discharge-report": { "producer": ["api-producer-data"] },
     "DocumentReference.search-type": { "server": ["api-provider-doc"], "client": ["api-consumer-doc"] },
     "DocumentReference.read": { "server": ["api-provider-doc"], "client": ["api-consumer-doc"] },
     "Binary.read": { "server": ["api-provider-doc"], "client": ["api-consumer-doc"] },

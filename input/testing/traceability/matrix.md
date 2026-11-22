@@ -23,7 +23,7 @@ A requirement is listed as having tests when a scenario is *tagged* with a path 
 | `api-consumer-patient` | EHDS Annex II §2.2 | con-002, pub-002, rc-002, rc-003 |
 | `api-consumer-doc` | EHDS Annex II §2.2 | con-003, con-004, con-005 |
 | `api-consumer-resource` | EHDS Annex II §2.2 | rc-004, rc-005, rc-006 |
-| `api-producer-data` | EHDS Annex II 2.1, 2.4 | **no test in this repository** |
+| `api-producer-data` | EHDS Annex II 2.1, 2.4 | cnt-001, cnt-002, cnt-003 |
 | `api-consumer-data` | EHDS Annex II §2.2 | **no test in this repository** |
 | `api-backendEncryption` | EHDS Annex II §1.4, Art. 36(3)(e) | con-006, pub-006, rc-007 |
 
@@ -98,3 +98,6 @@ A requirement is listed as having tests when a scenario is *tagged* with a path 
 | rc-005 | ResourceConsumer | `api-consumer-resource` | Observation.search.patient, Observation.search.category, Observation.search.code, Observation.search.date |
 | rc-006 | ResourceConsumer | `api-consumer-resource` | AllergyIntolerance.search.patient |
 | rc-007 | ResourceConsumer | `api-backendEncryption` | security.tls |
+| cnt-001 | ContentProducer | `api-producer-data` | content.patient-summary |
+| cnt-002 | ContentProducer | `api-producer-data` | content.laboratory-report |
+| cnt-003 | ContentProducer | `api-producer-data` | content.discharge-report |
