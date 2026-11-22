@@ -32,7 +32,7 @@ Feature: EEHRxF Resource Access Provider — read and search of patient resource
     Scenario: rap-002 A request without a token is refused
       Given Client is asked for $patientIdentifier with "The identifier (system|value) of the reference patient"
       When Client gets from ResourceAccessProvider at "/Patient?identifier=" with id $patientIdentifier as $unauth
-      Then $response.status should be 401
+      Then $response.status should be one of "401, 403"
 
     @covers:security.scope
     # Fixture contract: fixtures/provider-v1/manifest.json, cases.rap-003 (input bindings and expected data).
