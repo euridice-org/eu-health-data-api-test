@@ -2,10 +2,14 @@
   "name": "eu-health-data-api-itb",
   "private": true,
   "type": "module",
-  "engines": { "node": ">=22" },
+  "engines": {
+    "node": ">=22"
+  },
   "scripts": {
     "compile": "node compile.mjs",
-    "setup": "node setup.mjs"
+    "setup": "node setup.mjs",
+    "release": "node release.mjs",
+    "test": "node --test test-compiled-suites.mjs"
   },
   "dependencies": {
     "@opentestbed/otb-gherkin": "0.5.0",

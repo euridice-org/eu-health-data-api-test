@@ -2,6 +2,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { execFileSync } from 'node:child_process';
+import { buildMatrix, describeScenario, loadRequirements } from '../scripts/lib/traceability.mjs';
 
 const root = path.dirname(fileURLToPath(import.meta.url));
 const features = path.resolve(root, '../input/testing/gherkin');
@@ -13,6 +14,9 @@ fs.rmSync(path.join(build, 'manifest.json'), { force: true });
 execFileSync(process.execPath, [cli, 'dialects', '--installed', '--out', path.join(build, 'assets')], {
   cwd: root, stdio: 'inherit',
 });
+// Fails the build on a @covers path the requirements mapping does not know.
+const requirementsTable = loadRequirements();
+const matrix = buildMatrix({ table: requirementsTable });
 const manifest = [];
 for (const filename of fs.readdirSync(features).filter(f => f.endsWith('.feature')).sort()) {
   const source = path.join(features, filename);
@@ -33,6 +37,11 @@ for (const filename of fs.readdirSync(features).filter(f => f.endsWith('.feature
   if (!result.ok || report.errors.length || report.warnings.length || !report.testCases.length) {
     throw new Error(`Compilation failed: ${JSON.stringify(result)}`);
   }
+  // normalize.py adds this requirement line to each test case's description.
+  const descriptions = Object.fromEntries(Object.entries(matrix.scenarios)
+    .filter(([, scenario]) => scenario.feature === filename)
+    .map(([id, scenario]) => [id, describeScenario(scenario, requirementsTable)]));
+  fs.writeFileSync(path.join(out, 'descriptions.json'), JSON.stringify(descriptions, null, 2) + '\n');
   execFileSync('python3', [path.join(root, 'normalize.py'), out], { stdio: 'inherit' });
   manifest.push({ feature: filename, actor, suite: report.suite,
     testCases: report.testCases, archive: `${name}/suite.zip` });

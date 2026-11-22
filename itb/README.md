@@ -77,10 +77,23 @@ their normal viewer.
 
 ## Configure an implementation
 
-The provider features currently use `http://ehr.example.org/fhir`. Replace that
-placeholder in the relevant source feature with your implementation's base URL,
-then rerun `./itb/start.sh`. For a server running on the Docker host, use
-`http://host.docker.internal:<port>/<path>` so the engine can reach it.
+The suites are never edited to point at an implementation. Each server actor
+(DocumentAccessProvider, GroupedProvider, ResourceAccessProvider) declares a
+`baseUrl` parameter on its conformance statement, and every test case reads it.
+Set it in the ITB UI (the statement's configuration), through the ITB REST API
+(`POST /configure`, `statementProperties`), or with the helper:
+
+```sh
+node --env-file=itb/.env itb/configure.mjs DocumentAccessProvider http://host.docker.internal:8082/fhir
+node --env-file=itb/.env itb/configure.mjs DocumentAccessProvider --clear
+```
+
+A trailing slash is ignored. Until it is set, the suites fall back to the
+placeholder `http://ehr.example.org/fhir` from the feature file, which cannot
+succeed, and ITB logs that `baseUrl` is not in the session context. For a server
+on the Docker host use `http://host.docker.internal:<port>/<path>` so the engine
+can reach it. Clients (consumers and the publisher) have no endpoint to set: the
+test bed calls them back.
 
 Provider cases prompt only for the tokens and reference identifiers used by that
 scenario. CapabilityStatement checks (`dap-001`, `dap-002`, `dap-014`, `grp-001`,
@@ -135,6 +148,33 @@ Optional ports: add `ITB_PORT=9001` and/or `ITB_CALLBACK_PORT=8081` to `itb/.env
 before startup if the defaults are occupied. Compose uses a dedicated project
 name and volumes and does not claim fixed container names.
 
+## Requirements on each test case
+
+Every compiled test case's description ends with the requirement it implements,
+for example `Requirements: api-provider-doc (EHDS Annex II §2.1). Covers:
+DocumentReference.search-type.`, with a link to the specification's regulatory
+anchors. The requirement IDs are the Xt-EHR D5.1 IDs, mapped from each scenario's
+`@covers` tags in [requirements.json](../input/testing/traceability/requirements.json).
+That mapping is a draft for the specification owners to confirm.
+`node scripts/build-traceability.mjs` writes the matrix beside it and lists the
+requirements that have no test yet; `--check` fails when the matrix is stale or a
+`@covers` path is unmapped, and `compile` fails on an unmapped path.
+
+## Release archives
+
+```sh
+npm run --prefix itb compile && npm run --prefix itb release
+npm run --prefix itb test      # checks on the compiled suites, no Docker
+```
+
+`itb/build/release/` then holds one suite ZIP per feature, `SHA256SUMS`,
+`release.json` (version, commit, target ITB version, compiler versions, suites,
+requirements without a test) and the traceability matrix. The archives are
+byte-for-byte reproducible. They are normalised to stock ITB 1.30.2 (see below);
+deploy them to any ITB through the UI or `POST /testsuite/deploy`. Whether another
+ITB installation runs this version has to be checked with its operator. The
+`.github/workflows/itb-suites.yml` workflow builds and attaches them to a release.
+
 ## Build and compatibility details
 
 The npm lockfile pins `@opentestbed/otb-gherkin` 0.5.0 and the FHIR validator
@@ -170,6 +210,9 @@ The validator's package cache and the ITB database/repository use named volumes.
 | `compile.mjs`, `normalize.py` | Build a deployable ZIP per feature |
 | `setup.mjs` | REST bootstrap, suite import and actor assignment |
 | `users.mjs` | Local login provisioning and UI access verification |
+| `configure.mjs` | Set or clear a server actor's `baseUrl` without editing a suite |
+| `release.mjs` | Versioned, checksummed suite archives for a test bed that deploys them |
+| `test-compiled-suites.mjs` | Checks on the compiled suites: parameter, requirement lines, reproducibility |
 | `smoke.mjs`, `tests/smoke.feature` | Positive and negative engine integration checks |
 | `test-search-assertions.mjs` | Server-independent FHIRPath regression checks using shared fixtures |
 | `validator/Dockerfile` | Checksum-pinned FHIR validator REST service |
