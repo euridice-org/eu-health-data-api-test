@@ -19,6 +19,8 @@ This guide declares its tests with the [TestPlan](https://build.fhir.org/ig/HL7/
 
 The EU Health Data API states actor requirements in CapabilityStatement expectations and narrative. Each scenario names its requirement paths in @covers. These are not profile obligation extensions, and the tags alone do not prove complete coverage.
 
+The package also carries `tests/traceability/`: `requirements.json` maps each `@covers` path to the Xt-EHR D5.1 requirement it implements (for a tested server or a tested client) and to its EHDS basis, as the [specification's regulatory anchors](https://build.fhir.org/ig/euridice-org/eu-health-data-api/en/regulatoryAnchors.html) state them, and `matrix.md` and `matrix.json` are generated from it. The mapping is a draft that the specification owners have not confirmed. The matrix lists the requirements that no scenario is tagged for: discovery of the authorization server, issuing tokens, the consumer's presented token, and the content-format requirements. The six logging-component and five general D5.1 requirements, which the specification leaves out of scope, are not in the matrix and have no tests here.
+
 <a name="fixtures"> </a>
 
 ### Fixture contract and expected results

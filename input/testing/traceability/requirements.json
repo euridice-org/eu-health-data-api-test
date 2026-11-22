@@ -1,0 +1,141 @@
+{
+  "version": "0.1.0",
+  "status": "draft: the covers mapping is an unreviewed judgement and must be confirmed by the specification owners",
+  "specification": "hl7.fhir.eu.health-data-api@1.0.0-ballot",
+  "source": "https://build.fhir.org/ig/euridice-org/eu-health-data-api/en/regulatoryAnchors.html",
+  "note": "Requirement IDs are the Xt-EHR D5.1 IDs the specification itself uses. The EHDS implementing acts under Articles 15 and 36 (still in draft) will define the final requirements: when they do, change only this table and the covers mapping. D5.1 also has 6 logging-component and 5 general requirements that the specification leaves out of scope; they are not listed here and have no tests in this repository.",
+  "requirements": {
+    "api-provider-general": {
+      "actor": "Access Provider",
+      "basis": "EHDS Annex II §2.1",
+      "text": "The EHR system acting as a provider SHALL provide access to its priority category data by offering an API that complies to the EHDS API specification."
+    },
+    "api-provider-backendAuthDiscovery": {
+      "actor": "Access Provider",
+      "basis": "EHDS Annex II §1.4, Art. 36(3)(e)",
+      "text": "The EHR system Interoperability Software Component SHALL enable discovery of its authorization server information to enable a consumer to retrieve authorization."
+    },
+    "api-provider-backendAuthProvideToken": {
+      "actor": "Access Provider",
+      "basis": "EHDS Annex II §1.4, Art. 36(3)(e)",
+      "text": "The EHR system Interoperability Software Component SHALL support issuing authorization tokens to consumer EHR systems."
+    },
+    "api-provider-backendAuthRequireToken": {
+      "actor": "Access Provider",
+      "basis": "EHDS Annex II §1.4, Art. 36(3)(e)",
+      "text": "The EHR system Interoperability Software Component SHALL require a valid authorization token from the Consumer EHR on Interoperability Component exchange."
+    },
+    "api-provider-patient": {
+      "actor": "Access Provider",
+      "basis": "EHDS Annex II §2.1",
+      "text": "The EHR system Interoperability Software Component SHOULD offer a patient lookup API."
+    },
+    "api-provider-doc": {
+      "actor": "Access Provider",
+      "basis": "EHDS Annex II §2.1",
+      "text": "The EHR system Interoperability Software Component SHALL offer an API that enables an external system to access and retrieve its priority category data modelled as FHIR Documents."
+    },
+    "api-provider-resource": {
+      "actor": "Access Provider",
+      "basis": "EHDS Annex II §2.1",
+      "text": "The EHR system Interoperability Software Component SHALL offer search and read access via individual FHIR Resource API(s)."
+    },
+    "api-consumer-general": {
+      "actor": "Consumer",
+      "basis": "EHDS Annex II §2.2",
+      "text": "The EHR system Interoperability Software Component acting as a consumer SHALL consume external priority category data via an API conforming to the EHDS API specification."
+    },
+    "api-consumer-backendAuthObtainToken": {
+      "actor": "Consumer",
+      "basis": "EHDS Annex II §1.4, Art. 36(3)(e)",
+      "text": "The EHR system Interoperability Software Component SHALL obtain an authorization token from the provider's designated authorization server."
+    },
+    "api-consumer-backendAuthPresentToken": {
+      "actor": "Consumer",
+      "basis": "EHDS Annex II §1.4, Art. 36(3)(e)",
+      "text": "The EHR system Interoperability Software Component SHALL present a valid token to the Provider EHR on Interoperability Component Exchange."
+    },
+    "api-consumer-patient": {
+      "actor": "Consumer",
+      "basis": "EHDS Annex II §2.2",
+      "text": "The EHR system Interoperability Software Component SHALL support an external patient lookup query API."
+    },
+    "api-consumer-doc": {
+      "actor": "Consumer",
+      "basis": "EHDS Annex II §2.2",
+      "text": "The EHR system Interoperability Software Component SHALL support an external document query API."
+    },
+    "api-consumer-resource": {
+      "actor": "Consumer",
+      "basis": "EHDS Annex II §2.2",
+      "text": "The EHR system Interoperability Software Component SHALL support an external resource query API."
+    },
+    "api-producer-data": {
+      "actor": "Any system providing data",
+      "basis": "EHDS Annex II 2.1, 2.4",
+      "text": "The EHR system SHALL be capable of providing priority category data that conforms to the EEHRxF data format."
+    },
+    "api-consumer-data": {
+      "actor": "Any system receiving data",
+      "basis": "EHDS Annex II §2.2",
+      "text": "The EHR system SHALL be able to receive and handle data conforming to the EEHRxF data format."
+    },
+    "api-backendEncryption": {
+      "actor": "All",
+      "basis": "EHDS Annex II §1.4, Art. 36(3)(e)",
+      "text": "The EHR system Interoperability Component SHALL be capable of transport-encrypted data exchange."
+    }
+  },
+  "covers": {
+    "CapabilityStatement.rest.resource.DocumentReference": { "server": ["api-provider-general", "api-provider-doc"] },
+    "CapabilityStatement.rest.resource.Binary": { "server": ["api-provider-general", "api-provider-doc"] },
+    "CapabilityStatement.rest.resource.Patient": { "server": ["api-provider-resource"] },
+    "CapabilityStatement.rest.security": { "server": ["api-provider-backendAuthRequireToken"] },
+    "security.authorization": { "server": ["api-provider-backendAuthRequireToken"], "client": ["api-consumer-backendAuthObtainToken"] },
+    "security.scope": { "server": ["api-provider-backendAuthRequireToken"] },
+    "security.smart-backend-services": { "client": ["api-consumer-backendAuthObtainToken"] },
+    "security.tls": { "server": ["api-backendEncryption"], "client": ["api-backendEncryption"] },
+    "DocumentReference.search-type": { "server": ["api-provider-doc"], "client": ["api-consumer-doc"] },
+    "DocumentReference.read": { "server": ["api-provider-doc"], "client": ["api-consumer-doc"] },
+    "Binary.read": { "server": ["api-provider-doc"], "client": ["api-consumer-doc"] },
+    "DocumentReference.create": {
+      "server": [],
+      "client": ["api-provider-general"],
+      "note": "Server side: the Document Submission Option, which the specification states is not required to satisfy any D5.1 requirement. Client side: the Delegated Access Option, the Document Publisher satisfying §2.1 by publishing to an Access Provider."
+    },
+    "Patient.read": { "server": ["api-provider-patient"], "client": ["api-consumer-patient"] },
+    "Patient.search-type": { "server": ["api-provider-patient"], "client": ["api-consumer-patient"] },
+    "Patient.search.id": { "server": ["api-provider-patient"], "client": ["api-consumer-patient"] },
+    "Patient.search.identifier": { "server": ["api-provider-patient"], "client": ["api-consumer-patient"] },
+    "Patient.search.active": { "server": ["api-provider-patient"], "client": ["api-consumer-patient"] },
+    "Patient.search.birthdate": { "server": ["api-provider-patient"], "client": ["api-consumer-patient"] },
+    "Patient.search.family": { "server": ["api-provider-patient"], "client": ["api-consumer-patient"] },
+    "Patient.search.gender": { "server": ["api-provider-patient"], "client": ["api-consumer-patient"] },
+    "Patient.search.given": { "server": ["api-provider-patient"], "client": ["api-consumer-patient"] },
+    "AllergyIntolerance.search-type": { "server": ["api-provider-resource"], "client": ["api-consumer-resource"] },
+    "AllergyIntolerance.search.patient": { "server": ["api-provider-resource"], "client": ["api-consumer-resource"] },
+    "Condition.read": { "server": ["api-provider-resource"], "client": ["api-consumer-resource"] },
+    "Condition.search-type": { "server": ["api-provider-resource"], "client": ["api-consumer-resource"] },
+    "Condition.search.patient": { "server": ["api-provider-resource"], "client": ["api-consumer-resource"] },
+    "DiagnosticReport.search-type": { "server": ["api-provider-resource"], "client": ["api-consumer-resource"] },
+    "DiagnosticReport.search.patient": { "server": ["api-provider-resource"], "client": ["api-consumer-resource"] },
+    "Encounter.search-type": { "server": ["api-provider-resource"], "client": ["api-consumer-resource"] },
+    "Encounter.search.patient": { "server": ["api-provider-resource"], "client": ["api-consumer-resource"] },
+    "ImagingStudy.search-type": { "server": ["api-provider-resource"], "client": ["api-consumer-resource"] },
+    "ImagingStudy.search.patient": { "server": ["api-provider-resource"], "client": ["api-consumer-resource"] },
+    "Immunization.search-type": { "server": ["api-provider-resource"], "client": ["api-consumer-resource"] },
+    "Immunization.search.patient": { "server": ["api-provider-resource"], "client": ["api-consumer-resource"] },
+    "MedicationDispense.search-type": { "server": ["api-provider-resource"], "client": ["api-consumer-resource"] },
+    "MedicationDispense.search.patient": { "server": ["api-provider-resource"], "client": ["api-consumer-resource"] },
+    "MedicationRequest.search-type": { "server": ["api-provider-resource"], "client": ["api-consumer-resource"] },
+    "MedicationRequest.search.patient": { "server": ["api-provider-resource"], "client": ["api-consumer-resource"] },
+    "MedicationStatement.search-type": { "server": ["api-provider-resource"], "client": ["api-consumer-resource"] },
+    "MedicationStatement.search.patient": { "server": ["api-provider-resource"], "client": ["api-consumer-resource"] },
+    "Observation.read": { "server": ["api-provider-resource"], "client": ["api-consumer-resource"] },
+    "Observation.search-type": { "server": ["api-provider-resource"], "client": ["api-consumer-resource"] },
+    "Observation.search.category": { "server": ["api-provider-resource"], "client": ["api-consumer-resource"] },
+    "Observation.search.code": { "server": ["api-provider-resource"], "client": ["api-consumer-resource"] },
+    "Observation.search.date": { "server": ["api-provider-resource"], "client": ["api-consumer-resource"] },
+    "Observation.search.patient": { "server": ["api-provider-resource"], "client": ["api-consumer-resource"] }
+  }
+}

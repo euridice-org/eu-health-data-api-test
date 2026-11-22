@@ -1,0 +1,1015 @@
+{
+  "specification": "hl7.fhir.eu.health-data-api@1.0.0-ballot",
+  "source": "https://build.fhir.org/ig/euridice-org/eu-health-data-api/en/regulatoryAnchors.html",
+  "status": "draft: the covers mapping is an unreviewed judgement and must be confirmed by the specification owners",
+  "requirements": {
+    "api-provider-general": {
+      "actor": "Access Provider",
+      "basis": "EHDS Annex II §2.1",
+      "text": "The EHR system acting as a provider SHALL provide access to its priority category data by offering an API that complies to the EHDS API specification.",
+      "scenarios": [
+        "dap-001",
+        "grp-001",
+        "pub-003",
+        "pub-004"
+      ]
+    },
+    "api-provider-backendAuthDiscovery": {
+      "actor": "Access Provider",
+      "basis": "EHDS Annex II §1.4, Art. 36(3)(e)",
+      "text": "The EHR system Interoperability Software Component SHALL enable discovery of its authorization server information to enable a consumer to retrieve authorization.",
+      "scenarios": []
+    },
+    "api-provider-backendAuthProvideToken": {
+      "actor": "Access Provider",
+      "basis": "EHDS Annex II §1.4, Art. 36(3)(e)",
+      "text": "The EHR system Interoperability Software Component SHALL support issuing authorization tokens to consumer EHR systems.",
+      "scenarios": []
+    },
+    "api-provider-backendAuthRequireToken": {
+      "actor": "Access Provider",
+      "basis": "EHDS Annex II §1.4, Art. 36(3)(e)",
+      "text": "The EHR system Interoperability Software Component SHALL require a valid authorization token from the Consumer EHR on Interoperability Component exchange.",
+      "scenarios": [
+        "dap-002",
+        "dap-003",
+        "dap-004",
+        "grp-002",
+        "grp-003",
+        "grp-004",
+        "rap-002",
+        "rap-003"
+      ]
+    },
+    "api-provider-patient": {
+      "actor": "Access Provider",
+      "basis": "EHDS Annex II §2.1",
+      "text": "The EHR system Interoperability Software Component SHOULD offer a patient lookup API.",
+      "scenarios": [
+        "dap-011",
+        "dap-012",
+        "dap-013",
+        "grp-011",
+        "grp-012",
+        "grp-013",
+        "rap-004",
+        "rap-005",
+        "rap-006",
+        "rap-018"
+      ]
+    },
+    "api-provider-doc": {
+      "actor": "Access Provider",
+      "basis": "EHDS Annex II §2.1",
+      "text": "The EHR system Interoperability Software Component SHALL offer an API that enables an external system to access and retrieve its priority category data modelled as FHIR Documents.",
+      "scenarios": [
+        "dap-001",
+        "dap-005",
+        "dap-006",
+        "dap-007",
+        "dap-008",
+        "dap-009",
+        "dap-010",
+        "grp-001",
+        "grp-005",
+        "grp-006",
+        "grp-007",
+        "grp-008",
+        "grp-009",
+        "grp-010"
+      ]
+    },
+    "api-provider-resource": {
+      "actor": "Access Provider",
+      "basis": "EHDS Annex II §2.1",
+      "text": "The EHR system Interoperability Software Component SHALL offer search and read access via individual FHIR Resource API(s).",
+      "scenarios": [
+        "rap-001",
+        "rap-007",
+        "rap-008",
+        "rap-009",
+        "rap-010",
+        "rap-011",
+        "rap-012",
+        "rap-013",
+        "rap-014",
+        "rap-015",
+        "rap-016",
+        "rap-017"
+      ]
+    },
+    "api-consumer-general": {
+      "actor": "Consumer",
+      "basis": "EHDS Annex II §2.2",
+      "text": "The EHR system Interoperability Software Component acting as a consumer SHALL consume external priority category data via an API conforming to the EHDS API specification.",
+      "scenarios": []
+    },
+    "api-consumer-backendAuthObtainToken": {
+      "actor": "Consumer",
+      "basis": "EHDS Annex II §1.4, Art. 36(3)(e)",
+      "text": "The EHR system Interoperability Software Component SHALL obtain an authorization token from the provider's designated authorization server.",
+      "scenarios": [
+        "con-001",
+        "pub-001",
+        "pub-005",
+        "rc-001"
+      ]
+    },
+    "api-consumer-backendAuthPresentToken": {
+      "actor": "Consumer",
+      "basis": "EHDS Annex II §1.4, Art. 36(3)(e)",
+      "text": "The EHR system Interoperability Software Component SHALL present a valid token to the Provider EHR on Interoperability Component Exchange.",
+      "scenarios": []
+    },
+    "api-consumer-patient": {
+      "actor": "Consumer",
+      "basis": "EHDS Annex II §2.2",
+      "text": "The EHR system Interoperability Software Component SHALL support an external patient lookup query API.",
+      "scenarios": [
+        "con-002",
+        "pub-002",
+        "rc-002",
+        "rc-003"
+      ]
+    },
+    "api-consumer-doc": {
+      "actor": "Consumer",
+      "basis": "EHDS Annex II §2.2",
+      "text": "The EHR system Interoperability Software Component SHALL support an external document query API.",
+      "scenarios": [
+        "con-003",
+        "con-004",
+        "con-005"
+      ]
+    },
+    "api-consumer-resource": {
+      "actor": "Consumer",
+      "basis": "EHDS Annex II §2.2",
+      "text": "The EHR system Interoperability Software Component SHALL support an external resource query API.",
+      "scenarios": [
+        "rc-004",
+        "rc-005",
+        "rc-006"
+      ]
+    },
+    "api-producer-data": {
+      "actor": "Any system providing data",
+      "basis": "EHDS Annex II 2.1, 2.4",
+      "text": "The EHR system SHALL be capable of providing priority category data that conforms to the EEHRxF data format.",
+      "scenarios": []
+    },
+    "api-consumer-data": {
+      "actor": "Any system receiving data",
+      "basis": "EHDS Annex II §2.2",
+      "text": "The EHR system SHALL be able to receive and handle data conforming to the EEHRxF data format.",
+      "scenarios": []
+    },
+    "api-backendEncryption": {
+      "actor": "All",
+      "basis": "EHDS Annex II §1.4, Art. 36(3)(e)",
+      "text": "The EHR system Interoperability Component SHALL be capable of transport-encrypted data exchange.",
+      "scenarios": [
+        "con-006",
+        "pub-006",
+        "rc-007"
+      ]
+    }
+  },
+  "scenarios": {
+    "dap-001": {
+      "feature": "eu-api-document-access-provider.feature",
+      "actor": "DocumentAccessProvider",
+      "side": "server",
+      "title": "The CapabilityStatement declares DocumentReference and Binary",
+      "covers": [
+        "CapabilityStatement.rest.resource.DocumentReference",
+        "CapabilityStatement.rest.resource.Binary"
+      ],
+      "requirements": [
+        "api-provider-general",
+        "api-provider-doc"
+      ]
+    },
+    "dap-002": {
+      "feature": "eu-api-document-access-provider.feature",
+      "actor": "DocumentAccessProvider",
+      "side": "server",
+      "title": "The CapabilityStatement declares SMART on FHIR security",
+      "covers": [
+        "CapabilityStatement.rest.security"
+      ],
+      "requirements": [
+        "api-provider-backendAuthRequireToken"
+      ]
+    },
+    "dap-003": {
+      "feature": "eu-api-document-access-provider.feature",
+      "actor": "DocumentAccessProvider",
+      "side": "server",
+      "title": "A request without a token is refused",
+      "covers": [
+        "security.authorization"
+      ],
+      "requirements": [
+        "api-provider-backendAuthRequireToken"
+      ]
+    },
+    "dap-004": {
+      "feature": "eu-api-document-access-provider.feature",
+      "actor": "DocumentAccessProvider",
+      "side": "server",
+      "title": "A token with no usable scope is refused",
+      "covers": [
+        "security.scope"
+      ],
+      "requirements": [
+        "api-provider-backendAuthRequireToken"
+      ]
+    },
+    "dap-005": {
+      "feature": "eu-api-document-access-provider.feature",
+      "actor": "DocumentAccessProvider",
+      "side": "server",
+      "title": "Search by patient returns a searchset of conformant DocumentReferences",
+      "covers": [
+        "DocumentReference.search-type"
+      ],
+      "requirements": [
+        "api-provider-doc"
+      ]
+    },
+    "dap-006": {
+      "feature": "eu-api-document-access-provider.feature",
+      "actor": "DocumentAccessProvider",
+      "side": "server",
+      "title": "Search by EEHRxF priority category",
+      "covers": [
+        "DocumentReference.search-type"
+      ],
+      "requirements": [
+        "api-provider-doc"
+      ]
+    },
+    "dap-007": {
+      "feature": "eu-api-document-access-provider.feature",
+      "actor": "DocumentAccessProvider",
+      "side": "server",
+      "title": "Search by LOINC document type",
+      "covers": [
+        "DocumentReference.search-type"
+      ],
+      "requirements": [
+        "api-provider-doc"
+      ]
+    },
+    "dap-008": {
+      "feature": "eu-api-document-access-provider.feature",
+      "actor": "DocumentAccessProvider",
+      "side": "server",
+      "title": "Read a DocumentReference by id",
+      "covers": [
+        "DocumentReference.read"
+      ],
+      "requirements": [
+        "api-provider-doc"
+      ]
+    },
+    "dap-009": {
+      "feature": "eu-api-document-access-provider.feature",
+      "actor": "DocumentAccessProvider",
+      "side": "server",
+      "title": "An unknown DocumentReference id gives 404 and an OperationOutcome",
+      "covers": [
+        "DocumentReference.read"
+      ],
+      "requirements": [
+        "api-provider-doc"
+      ]
+    },
+    "dap-010": {
+      "feature": "eu-api-document-access-provider.feature",
+      "actor": "DocumentAccessProvider",
+      "side": "server",
+      "title": "Read the document content as a Binary",
+      "covers": [
+        "Binary.read"
+      ],
+      "requirements": [
+        "api-provider-doc"
+      ]
+    },
+    "dap-011": {
+      "feature": "eu-api-document-access-provider.feature",
+      "actor": "DocumentAccessProvider",
+      "side": "server",
+      "title": "Search Patient by identifier",
+      "covers": [
+        "Patient.read",
+        "Patient.search-type",
+        "Patient.search.identifier"
+      ],
+      "requirements": [
+        "api-provider-patient"
+      ]
+    },
+    "dap-012": {
+      "feature": "eu-api-document-access-provider.feature",
+      "actor": "DocumentAccessProvider",
+      "side": "server",
+      "title": "Read Patient by id and conform to patient-eu-core",
+      "covers": [
+        "Patient.read",
+        "Patient.search.id"
+      ],
+      "requirements": [
+        "api-provider-patient"
+      ]
+    },
+    "dap-013": {
+      "feature": "eu-api-document-access-provider.feature",
+      "actor": "DocumentAccessProvider",
+      "side": "server",
+      "title": "Search Patient by demographics the reference patient has",
+      "covers": [
+        "Patient.search.family",
+        "Patient.search.given",
+        "Patient.search.birthdate",
+        "Patient.search.gender"
+      ],
+      "requirements": [
+        "api-provider-patient"
+      ]
+    },
+    "dap-014": {
+      "feature": "eu-api-document-access-provider.feature",
+      "actor": "DocumentAccessProvider",
+      "side": "server",
+      "title": "The CapabilityStatement declares create on DocumentReference",
+      "covers": [
+        "DocumentReference.create"
+      ],
+      "requirements": []
+    },
+    "dap-015": {
+      "feature": "eu-api-document-access-provider.feature",
+      "actor": "DocumentAccessProvider",
+      "side": "server",
+      "title": "A Simplified Publish with embedded content is accepted and then findable",
+      "covers": [
+        "DocumentReference.create"
+      ],
+      "requirements": []
+    },
+    "dap-016": {
+      "feature": "eu-api-document-access-provider.feature",
+      "actor": "DocumentAccessProvider",
+      "side": "server",
+      "title": "A submission without content is refused",
+      "covers": [
+        "DocumentReference.create"
+      ],
+      "requirements": []
+    },
+    "dap-017": {
+      "feature": "eu-api-document-access-provider.feature",
+      "actor": "DocumentAccessProvider",
+      "side": "server",
+      "title": "A submission with a token that cannot create is refused",
+      "covers": [
+        "DocumentReference.create"
+      ],
+      "requirements": []
+    },
+    "con-001": {
+      "feature": "eu-api-document-consumer.feature",
+      "actor": "DocumentConsumer",
+      "side": "client",
+      "title": "The SUT authenticates with a signed JWT client assertion (RFC 7523)",
+      "covers": [
+        "security.smart-backend-services"
+      ],
+      "requirements": [
+        "api-consumer-backendAuthObtainToken"
+      ]
+    },
+    "con-002": {
+      "feature": "eu-api-document-consumer.feature",
+      "actor": "DocumentConsumer",
+      "side": "client",
+      "title": "The SUT searches Patient by the identifier parameter",
+      "covers": [
+        "Patient.search-type",
+        "Patient.search.identifier"
+      ],
+      "requirements": [
+        "api-consumer-patient"
+      ]
+    },
+    "con-003": {
+      "feature": "eu-api-document-consumer.feature",
+      "actor": "DocumentConsumer",
+      "side": "client",
+      "title": "The SUT searches DocumentReference by patient",
+      "covers": [
+        "DocumentReference.search-type"
+      ],
+      "requirements": [
+        "api-consumer-doc"
+      ]
+    },
+    "con-004": {
+      "feature": "eu-api-document-consumer.feature",
+      "actor": "DocumentConsumer",
+      "side": "client",
+      "title": "The SUT can narrow the search by category or type",
+      "covers": [
+        "DocumentReference.search-type"
+      ],
+      "requirements": [
+        "api-consumer-doc"
+      ]
+    },
+    "con-005": {
+      "feature": "eu-api-document-consumer.feature",
+      "actor": "DocumentConsumer",
+      "side": "client",
+      "title": "The SUT retrieves the document content with a bearer token",
+      "covers": [
+        "Binary.read",
+        "DocumentReference.read"
+      ],
+      "requirements": [
+        "api-consumer-doc"
+      ]
+    },
+    "con-006": {
+      "feature": "eu-api-document-consumer.feature",
+      "actor": "DocumentConsumer",
+      "side": "client",
+      "title": "TLS 1.2 or higher is used for all communications",
+      "covers": [
+        "security.tls"
+      ],
+      "requirements": [
+        "api-backendEncryption"
+      ]
+    },
+    "grp-001": {
+      "feature": "eu-api-document-publisher-access-provider.feature",
+      "actor": "GroupedProvider",
+      "side": "server",
+      "title": "The CapabilityStatement declares DocumentReference and Binary",
+      "covers": [
+        "CapabilityStatement.rest.resource.DocumentReference",
+        "CapabilityStatement.rest.resource.Binary"
+      ],
+      "requirements": [
+        "api-provider-general",
+        "api-provider-doc"
+      ]
+    },
+    "grp-002": {
+      "feature": "eu-api-document-publisher-access-provider.feature",
+      "actor": "GroupedProvider",
+      "side": "server",
+      "title": "The CapabilityStatement declares SMART on FHIR security",
+      "covers": [
+        "CapabilityStatement.rest.security"
+      ],
+      "requirements": [
+        "api-provider-backendAuthRequireToken"
+      ]
+    },
+    "grp-003": {
+      "feature": "eu-api-document-publisher-access-provider.feature",
+      "actor": "GroupedProvider",
+      "side": "server",
+      "title": "A request without a token is refused",
+      "covers": [
+        "security.authorization"
+      ],
+      "requirements": [
+        "api-provider-backendAuthRequireToken"
+      ]
+    },
+    "grp-004": {
+      "feature": "eu-api-document-publisher-access-provider.feature",
+      "actor": "GroupedProvider",
+      "side": "server",
+      "title": "A token with no usable scope is refused",
+      "covers": [
+        "security.scope"
+      ],
+      "requirements": [
+        "api-provider-backendAuthRequireToken"
+      ]
+    },
+    "grp-005": {
+      "feature": "eu-api-document-publisher-access-provider.feature",
+      "actor": "GroupedProvider",
+      "side": "server",
+      "title": "Search by patient returns a searchset of conformant DocumentReferences",
+      "covers": [
+        "DocumentReference.search-type"
+      ],
+      "requirements": [
+        "api-provider-doc"
+      ]
+    },
+    "grp-006": {
+      "feature": "eu-api-document-publisher-access-provider.feature",
+      "actor": "GroupedProvider",
+      "side": "server",
+      "title": "Search by EEHRxF priority category",
+      "covers": [
+        "DocumentReference.search-type"
+      ],
+      "requirements": [
+        "api-provider-doc"
+      ]
+    },
+    "grp-007": {
+      "feature": "eu-api-document-publisher-access-provider.feature",
+      "actor": "GroupedProvider",
+      "side": "server",
+      "title": "Search by LOINC document type",
+      "covers": [
+        "DocumentReference.search-type"
+      ],
+      "requirements": [
+        "api-provider-doc"
+      ]
+    },
+    "grp-008": {
+      "feature": "eu-api-document-publisher-access-provider.feature",
+      "actor": "GroupedProvider",
+      "side": "server",
+      "title": "Read a DocumentReference by id",
+      "covers": [
+        "DocumentReference.read"
+      ],
+      "requirements": [
+        "api-provider-doc"
+      ]
+    },
+    "grp-009": {
+      "feature": "eu-api-document-publisher-access-provider.feature",
+      "actor": "GroupedProvider",
+      "side": "server",
+      "title": "An unknown DocumentReference id gives 404 and an OperationOutcome",
+      "covers": [
+        "DocumentReference.read"
+      ],
+      "requirements": [
+        "api-provider-doc"
+      ]
+    },
+    "grp-010": {
+      "feature": "eu-api-document-publisher-access-provider.feature",
+      "actor": "GroupedProvider",
+      "side": "server",
+      "title": "Read the document content as a Binary",
+      "covers": [
+        "Binary.read"
+      ],
+      "requirements": [
+        "api-provider-doc"
+      ]
+    },
+    "grp-011": {
+      "feature": "eu-api-document-publisher-access-provider.feature",
+      "actor": "GroupedProvider",
+      "side": "server",
+      "title": "Search Patient by identifier",
+      "covers": [
+        "Patient.read",
+        "Patient.search-type",
+        "Patient.search.identifier"
+      ],
+      "requirements": [
+        "api-provider-patient"
+      ]
+    },
+    "grp-012": {
+      "feature": "eu-api-document-publisher-access-provider.feature",
+      "actor": "GroupedProvider",
+      "side": "server",
+      "title": "Read Patient by id and conform to patient-eu-core",
+      "covers": [
+        "Patient.read",
+        "Patient.search.id"
+      ],
+      "requirements": [
+        "api-provider-patient"
+      ]
+    },
+    "grp-013": {
+      "feature": "eu-api-document-publisher-access-provider.feature",
+      "actor": "GroupedProvider",
+      "side": "server",
+      "title": "Search Patient by demographics the reference patient has",
+      "covers": [
+        "Patient.search.family",
+        "Patient.search.given",
+        "Patient.search.birthdate",
+        "Patient.search.gender"
+      ],
+      "requirements": [
+        "api-provider-patient"
+      ]
+    },
+    "pub-001": {
+      "feature": "eu-api-document-publisher.feature",
+      "actor": "DocumentPublisher",
+      "side": "client",
+      "title": "The SUT authenticates with a signed JWT client assertion (RFC 7523)",
+      "covers": [
+        "security.smart-backend-services"
+      ],
+      "requirements": [
+        "api-consumer-backendAuthObtainToken"
+      ]
+    },
+    "pub-002": {
+      "feature": "eu-api-document-publisher.feature",
+      "actor": "DocumentPublisher",
+      "side": "client",
+      "title": "The SUT looks the patient up by identifier with a bearer token",
+      "covers": [
+        "Patient.search-type",
+        "Patient.search.identifier"
+      ],
+      "requirements": [
+        "api-consumer-patient"
+      ]
+    },
+    "pub-003": {
+      "feature": "eu-api-document-publisher.feature",
+      "actor": "DocumentPublisher",
+      "side": "client",
+      "title": "The SUT creates a DocumentReference with the document embedded",
+      "covers": [
+        "DocumentReference.create"
+      ],
+      "requirements": [
+        "api-provider-general"
+      ]
+    },
+    "pub-004": {
+      "feature": "eu-api-document-publisher.feature",
+      "actor": "DocumentPublisher",
+      "side": "client",
+      "title": "The SUT publishes only the minimal metadata profile it claims",
+      "covers": [
+        "DocumentReference.create"
+      ],
+      "requirements": [
+        "api-provider-general"
+      ]
+    },
+    "pub-005": {
+      "feature": "eu-api-document-publisher.feature",
+      "actor": "DocumentPublisher",
+      "side": "client",
+      "title": "After a 401 the SUT obtains a fresh token before retrying",
+      "covers": [
+        "security.authorization"
+      ],
+      "requirements": [
+        "api-consumer-backendAuthObtainToken"
+      ]
+    },
+    "pub-006": {
+      "feature": "eu-api-document-publisher.feature",
+      "actor": "DocumentPublisher",
+      "side": "client",
+      "title": "TLS 1.2 or higher is used for all communications",
+      "covers": [
+        "security.tls"
+      ],
+      "requirements": [
+        "api-backendEncryption"
+      ]
+    },
+    "rap-001": {
+      "feature": "eu-api-resource-access-provider.feature",
+      "actor": "ResourceAccessProvider",
+      "side": "server",
+      "title": "The CapabilityStatement declares Patient read and search and SMART security",
+      "covers": [
+        "CapabilityStatement.rest.resource.Patient"
+      ],
+      "requirements": [
+        "api-provider-resource"
+      ]
+    },
+    "rap-002": {
+      "feature": "eu-api-resource-access-provider.feature",
+      "actor": "ResourceAccessProvider",
+      "side": "server",
+      "title": "A request without a token is refused",
+      "covers": [
+        "security.authorization"
+      ],
+      "requirements": [
+        "api-provider-backendAuthRequireToken"
+      ]
+    },
+    "rap-003": {
+      "feature": "eu-api-resource-access-provider.feature",
+      "actor": "ResourceAccessProvider",
+      "side": "server",
+      "title": "A token with no usable scope is refused",
+      "covers": [
+        "security.scope"
+      ],
+      "requirements": [
+        "api-provider-backendAuthRequireToken"
+      ]
+    },
+    "rap-004": {
+      "feature": "eu-api-resource-access-provider.feature",
+      "actor": "ResourceAccessProvider",
+      "side": "server",
+      "title": "Read the patient and conform to patient-eu-core",
+      "covers": [
+        "Patient.read"
+      ],
+      "requirements": [
+        "api-provider-patient"
+      ]
+    },
+    "rap-005": {
+      "feature": "eu-api-resource-access-provider.feature",
+      "actor": "ResourceAccessProvider",
+      "side": "server",
+      "title": "Search Patient by identifier and by _id",
+      "covers": [
+        "Patient.search.identifier",
+        "Patient.search.id"
+      ],
+      "requirements": [
+        "api-provider-patient"
+      ]
+    },
+    "rap-006": {
+      "feature": "eu-api-resource-access-provider.feature",
+      "actor": "ResourceAccessProvider",
+      "side": "server",
+      "title": "Search Patient by the demographics the reference patient carries",
+      "covers": [
+        "Patient.search.family",
+        "Patient.search.given",
+        "Patient.search.birthdate",
+        "Patient.search.gender",
+        "Patient.search.active"
+      ],
+      "requirements": [
+        "api-provider-patient"
+      ]
+    },
+    "rap-007": {
+      "feature": "eu-api-resource-access-provider.feature",
+      "actor": "ResourceAccessProvider",
+      "side": "server",
+      "title": "Search Condition by patient returns a searchset of Condition",
+      "covers": [
+        "Condition.search-type",
+        "Condition.search.patient"
+      ],
+      "requirements": [
+        "api-provider-resource"
+      ]
+    },
+    "rap-008": {
+      "feature": "eu-api-resource-access-provider.feature",
+      "actor": "ResourceAccessProvider",
+      "side": "server",
+      "title": "Search AllergyIntolerance by patient returns a searchset of AllergyIntolerance",
+      "covers": [
+        "AllergyIntolerance.search-type",
+        "AllergyIntolerance.search.patient"
+      ],
+      "requirements": [
+        "api-provider-resource"
+      ]
+    },
+    "rap-009": {
+      "feature": "eu-api-resource-access-provider.feature",
+      "actor": "ResourceAccessProvider",
+      "side": "server",
+      "title": "Search Observation by patient returns a searchset of Observation",
+      "covers": [
+        "Observation.search-type",
+        "Observation.search.patient"
+      ],
+      "requirements": [
+        "api-provider-resource"
+      ]
+    },
+    "rap-010": {
+      "feature": "eu-api-resource-access-provider.feature",
+      "actor": "ResourceAccessProvider",
+      "side": "server",
+      "title": "Search DiagnosticReport by patient returns a searchset of DiagnosticReport",
+      "covers": [
+        "DiagnosticReport.search-type",
+        "DiagnosticReport.search.patient"
+      ],
+      "requirements": [
+        "api-provider-resource"
+      ]
+    },
+    "rap-011": {
+      "feature": "eu-api-resource-access-provider.feature",
+      "actor": "ResourceAccessProvider",
+      "side": "server",
+      "title": "Search ImagingStudy by patient returns a searchset of ImagingStudy",
+      "covers": [
+        "ImagingStudy.search-type",
+        "ImagingStudy.search.patient"
+      ],
+      "requirements": [
+        "api-provider-resource"
+      ]
+    },
+    "rap-012": {
+      "feature": "eu-api-resource-access-provider.feature",
+      "actor": "ResourceAccessProvider",
+      "side": "server",
+      "title": "Search MedicationRequest by patient returns a searchset of MedicationRequest",
+      "covers": [
+        "MedicationRequest.search-type",
+        "MedicationRequest.search.patient"
+      ],
+      "requirements": [
+        "api-provider-resource"
+      ]
+    },
+    "rap-013": {
+      "feature": "eu-api-resource-access-provider.feature",
+      "actor": "ResourceAccessProvider",
+      "side": "server",
+      "title": "Search MedicationDispense by patient returns a searchset of MedicationDispense",
+      "covers": [
+        "MedicationDispense.search-type",
+        "MedicationDispense.search.patient"
+      ],
+      "requirements": [
+        "api-provider-resource"
+      ]
+    },
+    "rap-014": {
+      "feature": "eu-api-resource-access-provider.feature",
+      "actor": "ResourceAccessProvider",
+      "side": "server",
+      "title": "Search Immunization by patient returns a searchset of Immunization",
+      "covers": [
+        "Immunization.search-type",
+        "Immunization.search.patient"
+      ],
+      "requirements": [
+        "api-provider-resource"
+      ]
+    },
+    "rap-015": {
+      "feature": "eu-api-resource-access-provider.feature",
+      "actor": "ResourceAccessProvider",
+      "side": "server",
+      "title": "Search MedicationStatement by patient returns a searchset of MedicationStatement",
+      "covers": [
+        "MedicationStatement.search-type",
+        "MedicationStatement.search.patient"
+      ],
+      "requirements": [
+        "api-provider-resource"
+      ]
+    },
+    "rap-016": {
+      "feature": "eu-api-resource-access-provider.feature",
+      "actor": "ResourceAccessProvider",
+      "side": "server",
+      "title": "Search Encounter by patient returns a searchset of Encounter",
+      "covers": [
+        "Encounter.search-type",
+        "Encounter.search.patient"
+      ],
+      "requirements": [
+        "api-provider-resource"
+      ]
+    },
+    "rap-017": {
+      "feature": "eu-api-resource-access-provider.feature",
+      "actor": "ResourceAccessProvider",
+      "side": "server",
+      "title": "A found resource can be read back by its id",
+      "covers": [
+        "Observation.read",
+        "Condition.read"
+      ],
+      "requirements": [
+        "api-provider-resource"
+      ]
+    },
+    "rap-018": {
+      "feature": "eu-api-resource-access-provider.feature",
+      "actor": "ResourceAccessProvider",
+      "side": "server",
+      "title": "An unknown id gives 404 and an OperationOutcome",
+      "covers": [
+        "Patient.read"
+      ],
+      "requirements": [
+        "api-provider-patient"
+      ]
+    },
+    "rc-001": {
+      "feature": "eu-api-resource-consumer.feature",
+      "actor": "ResourceConsumer",
+      "side": "client",
+      "title": "The SUT authenticates with a signed JWT client assertion (RFC 7523)",
+      "covers": [
+        "security.smart-backend-services"
+      ],
+      "requirements": [
+        "api-consumer-backendAuthObtainToken"
+      ]
+    },
+    "rc-002": {
+      "feature": "eu-api-resource-consumer.feature",
+      "actor": "ResourceConsumer",
+      "side": "client",
+      "title": "The SUT searches Patient by the identifier parameter",
+      "covers": [
+        "Patient.search-type",
+        "Patient.search.identifier"
+      ],
+      "requirements": [
+        "api-consumer-patient"
+      ]
+    },
+    "rc-003": {
+      "feature": "eu-api-resource-consumer.feature",
+      "actor": "ResourceConsumer",
+      "side": "client",
+      "title": "The SUT reads the patient by logical id",
+      "covers": [
+        "Patient.read"
+      ],
+      "requirements": [
+        "api-consumer-patient"
+      ]
+    },
+    "rc-004": {
+      "feature": "eu-api-resource-consumer.feature",
+      "actor": "ResourceConsumer",
+      "side": "client",
+      "title": "The SUT searches Condition by the patient parameter",
+      "covers": [
+        "Condition.search.patient"
+      ],
+      "requirements": [
+        "api-consumer-resource"
+      ]
+    },
+    "rc-005": {
+      "feature": "eu-api-resource-consumer.feature",
+      "actor": "ResourceConsumer",
+      "side": "client",
+      "title": "The SUT searches Observation by patient and category",
+      "covers": [
+        "Observation.search.patient",
+        "Observation.search.category",
+        "Observation.search.code",
+        "Observation.search.date"
+      ],
+      "requirements": [
+        "api-consumer-resource"
+      ]
+    },
+    "rc-006": {
+      "feature": "eu-api-resource-consumer.feature",
+      "actor": "ResourceConsumer",
+      "side": "client",
+      "title": "The SUT searches AllergyIntolerance by the patient parameter",
+      "covers": [
+        "AllergyIntolerance.search.patient"
+      ],
+      "requirements": [
+        "api-consumer-resource"
+      ]
+    },
+    "rc-007": {
+      "feature": "eu-api-resource-consumer.feature",
+      "actor": "ResourceConsumer",
+      "side": "client",
+      "title": "TLS 1.2 or higher is used for all communications",
+      "covers": [
+        "security.tls"
+      ],
+      "requirements": [
+        "api-backendEncryption"
+      ]
+    }
+  }
+}
