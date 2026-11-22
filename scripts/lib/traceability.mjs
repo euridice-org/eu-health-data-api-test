@@ -57,6 +57,32 @@ export function requirementsFor(scenario, side, table) {
   return ids;
 }
 
+/** Stable error code of a scenario: the prefix and its upper-cased id. */
+export function errorCode(scenarioId, table = loadRequirements()) {
+  return `${table.errorCodes.prefix}-${scenarioId.toUpperCase()}`;
+}
+
+/**
+ * The message a tester reads when the test case fails (USB-060): the stable code, the
+ * requirement that is not met with its basis, and what to do about it. The failing
+ * assertion itself is in the step report. No double quote: it becomes a TDL string literal.
+ */
+export function failureMessage(scenarioId, entry, table = loadRequirements()) {
+  const link = remediation => `${remediation.text} See ${table.remediationBase}${remediation.page}`;
+  let requirement, remediation;
+  if (entry.requirements.length) {
+    requirement = entry.requirements.map(id => `${id} (${table.requirements[id].basis}): ${table.requirements[id].text}`).join(' | ');
+    remediation = [...new Set(entry.requirements.map(id => link(table.requirements[id].remediation)))].join(' | ');
+  } else {
+    requirement = 'none of the D5.1 requirements (an optional capability of the specification).';
+    remediation = entry.covers.map(c => table.covers[c].remediation?.[entry.side]).filter(Boolean).map(link).join(' | ')
+      || 'See the specification for this optional capability.';
+  }
+  const message = `${errorCode(scenarioId, table)}: requirement not met. ${requirement} Remediation: ${remediation} The failing assertion is in the step report.`;
+  if (/["$]/.test(message)) throw new Error(`${scenarioId}: the failure message contains a double quote or a dollar sign`);
+  return message;
+}
+
 export function buildMatrix({ dirs = [featuresDir, contentDir], table = loadRequirements() } = {}) {
   const scenarios = {};
   const requirements = Object.fromEntries(Object.entries(table.requirements)
@@ -67,7 +93,7 @@ export function buildMatrix({ dirs = [featuresDir, contentDir], table = loadRequ
     const feature = parseFeature(fs.readFileSync(file, 'utf8'), filename);
     for (const scenario of feature.scenarios) {
       const ids = requirementsFor(scenario, feature.side, table);
-      scenarios[scenario.id] = { feature: filename, actor: feature.actor, side: feature.side,
+      scenarios[scenario.id] = { code: errorCode(scenario.id, table), feature: filename, actor: feature.actor, side: feature.side,
         title: scenario.title, covers: scenario.covers, requirements: ids };
       for (const id of ids) requirements[id].scenarios.push(scenario.id);
     }
@@ -75,7 +101,7 @@ export function buildMatrix({ dirs = [featuresDir, contentDir], table = loadRequ
   const unusedPaths = Object.keys(table.covers).filter(
     covered => !Object.values(scenarios).some(s => s.covers.includes(covered)));
   if (unusedPaths.length) throw new Error(`requirements.json maps paths no scenario covers: ${unusedPaths.join(', ')}`);
-  return { specification: table.specification, source: table.source, status: table.status, requirements, scenarios };
+  return { specification: table.specification, source: table.source, status: table.status, errorCodes: table.errorCodes, requirements, scenarios };
 }
 
 /** The requirement line shown on a test case in the test bed (GEN-050, USB-050). */
@@ -83,6 +109,7 @@ export function describeScenario(entry, table) {
   const cited = entry.requirements.map(id => `${id} (${table.requirements[id].basis})`);
   return [cited.length ? `Requirements: ${cited.join('; ')}.` : 'Requirements: none of the D5.1 requirements (an optional capability of the specification).',
     entry.covers.length ? `Covers: ${entry.covers.join(', ')}.` : '',
+    `Error code: ${entry.code}.`,
     `Source: ${table.source}`].filter(Boolean).join(' ');
 }
 
@@ -96,6 +123,8 @@ export function renderMarkdown(matrix) {
     '',
     'A requirement is listed as having tests when a scenario is *tagged* with a path that implements it. A step that asserts something without a matching tag (for example the bearer token the consumers present) is not counted.',
     '',
+    `Error codes: ${matrix.errorCodes.rule}`,
+    '',
     '## By requirement',
     '',
     '| Requirement | EHDS basis | Scenarios |',
@@ -104,9 +133,9 @@ export function renderMarkdown(matrix) {
   for (const [id, requirement] of Object.entries(matrix.requirements)) {
     lines.push(`| \`${id}\` | ${requirement.basis} | ${requirement.scenarios.join(', ') || '**no test in this repository**'} |`);
   }
-  lines.push('', '## By scenario', '', '| Scenario | Actor | Requirements | Covers |', '| --- | --- | --- | --- |');
+  lines.push('', '## By scenario', '', '| Scenario | Error code | Actor | Requirements | Covers |', '| --- | --- | --- | --- | --- |');
   for (const [id, scenario] of Object.entries(matrix.scenarios)) {
-    lines.push(`| ${id} | ${scenario.actor} | ${scenario.requirements.map(r => `\`${r}\``).join(', ') || '-'} | ${scenario.covers.join(', ')} |`);
+    lines.push(`| ${id} | \`${scenario.code}\` | ${scenario.actor} | ${scenario.requirements.map(r => `\`${r}\``).join(', ') || '-'} | ${scenario.covers.join(', ')} |`);
   }
   return lines.join('\n') + '\n';
 }

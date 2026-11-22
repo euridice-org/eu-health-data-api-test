@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { parseFeature, requirementsFor, buildMatrix, describeScenario, loadRequirements } from './lib/traceability.mjs';
+import { parseFeature, requirementsFor, buildMatrix, describeScenario, failureMessage, errorCode, loadRequirements } from './lib/traceability.mjs';
 
 const table = loadRequirements();
 const feature = side => `@actor:X
@@ -43,9 +43,34 @@ test('every shipped scenario is traced, and the known gaps are reported rather t
 });
 
 test('the line shown on a test case names requirement, basis and source', () => {
-  const entry = { requirements: ['api-provider-doc'], covers: ['DocumentReference.read'] };
+  const entry = { code: 'EUAPI-DAP-008', requirements: ['api-provider-doc'], covers: ['DocumentReference.read'], side: 'server' };
   const text = describeScenario(entry, table);
+  assert.match(text, /Error code: EUAPI-DAP-008\./);
   assert.match(text, /api-provider-doc \(EHDS Annex II §2\.1\)/);
   assert.match(text, /Covers: DocumentReference\.read\./);
   assert.match(text, /regulatoryAnchors\.html/);
+});
+
+test('error codes derive from the scenario id, are unique and are never reused for another scenario', () => {
+  const matrix = buildMatrix();
+  const codes = Object.values(matrix.scenarios).map(s => s.code);
+  assert.equal(new Set(codes).size, codes.length);
+  assert.equal(errorCode('dap-003'), 'EUAPI-DAP-003');
+  for (const [id, scenario] of Object.entries(matrix.scenarios)) assert.equal(scenario.code, `EUAPI-${id.toUpperCase()}`);
+});
+
+test('a failure message names the code, the requirement and its basis, and what to do', () => {
+  const matrix = buildMatrix();
+  const message = failureMessage('dap-003', matrix.scenarios['dap-003'], table);
+  assert.match(message, /^EUAPI-DAP-003: requirement not met\./);
+  assert.match(message, /api-provider-backendAuthRequireToken \(EHDS Annex II §1\.4, Art\. 36\(3\)\(e\)\): The EHR system Interoperability Software Component SHALL require a valid authorization token/);
+  assert.match(message, /Remediation: .*401 or 403.*See https:\/\/build\.fhir\.org\/ig\/euridice-org\/eu-health-data-api\/en\/authorization\.html#incorporate-access-token/);
+  // The optional Document Submission Option has no D5.1 requirement and says so, with its own remediation.
+  const optional = failureMessage('dap-015', matrix.scenarios['dap-015'], table);
+  assert.match(optional, /none of the D5.1 requirements.*Document Submission Option, which is optional/);
+  for (const [id, scenario] of Object.entries(matrix.scenarios)) {
+    const text = failureMessage(id, scenario, table);
+    assert.ok(text.length < 1500, `${id} message is ${text.length} characters`);
+    assert.ok(!/["$]/.test(text));
+  }
 });

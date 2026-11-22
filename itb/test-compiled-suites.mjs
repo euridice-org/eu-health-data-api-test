@@ -40,12 +40,16 @@ test('a server actor reads its endpoint from the conformance statement and decla
   }
 });
 
-test('every test case says which requirements it implements', () => {
+test('every test case says which requirements it implements and what to do when it fails', () => {
   for (const suite of manifest) {
     for (const file of xmlFiles(path.join(build, path.dirname(suite.archive)))) {
       const text = read(file);
       if (!text.includes('<testcase xmlns')) continue;
-      assert.match(text, /<gitb:description>[^<]*\nRequirements: [^<]*Source: https:\/\/build\.fhir\.org\//, path.basename(file));
+      assert.match(text, /<gitb:description>[^<]*\nRequirements: [^<]*Error code: EUAPI-[A-Z]+-\d+\. Source: https:\/\/build\.fhir\.org\//, path.basename(file));
+      // USB-060: a failed case says which code and requirement, and what to do (the default text is replaced).
+      const scenario = path.basename(file).match(/^([a-z]+-\d+)-/)[1];
+      assert.match(text, new RegExp(`<failure>\\s*<default>"EUAPI-${scenario.toUpperCase()}: requirement not met\\. [^"]*Remediation: [^"]*See https://[^"]*The failing assertion is in the step report\\."</default>`), `${scenario} failure message`);
+      assert.doesNotMatch(text, /Test case failed\. Check step reports and logs/);
     }
   }
 });

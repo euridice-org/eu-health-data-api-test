@@ -155,13 +155,25 @@ def normalize(tree):
 
 
 def describe_requirements(tree, descriptions):
-    """Add the requirement line (compile.mjs writes descriptions.json) to a test case."""
+    """Add the requirement line and the failure message (compile.mjs writes descriptions.json).
+
+    The failure message carries the stable error code, the unmet requirement and the
+    remediation (USB-060); ITB shows it as the result message of a failed test case.
+    """
     if tree.tag != tag('testcase'):
         return
     scenario = re.match(r'([a-z]+-\d+)-', tree.get('id', ''))
+    if not scenario or scenario[1] not in descriptions:
+        return
+    entry = descriptions[scenario[1]]
     description = tree.find(f"{tag('metadata')}/{{{CORE}}}description")
-    if scenario and description is not None and scenario[1] in descriptions:
-        description.text = f"{description.text}\n{descriptions[scenario[1]]}"
+    description.text = f"{description.text}\n{entry['description']}"
+    failure = tree.find(f"{tag('output')}/{tag('failure')}/{tag('default')}")
+    if failure is None:
+        raise ValueError(f"{tree.get('id')}: no failure message to replace")
+    if '"' in entry['failure']:
+        raise ValueError(f"{tree.get('id')}: the failure message would break its string literal")
+    failure.text = f'"{entry["failure"]}"'
 
 
 def package(directory):

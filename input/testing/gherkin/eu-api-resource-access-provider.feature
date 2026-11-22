@@ -16,7 +16,7 @@ Feature: EEHRxF Resource Access Provider — read and search of patient resource
 
   Rule: The server declares what the actor requires
 
-    @covers:CapabilityStatement.rest.resource.Patient
+    @covers:CapabilityStatement.rest.resource.Patient,CapabilityStatement.rest.security
     # Fixture contract: fixtures/provider-v1/manifest.json, cases.rap-001 (input bindings and expected data).
     Scenario: rap-001 The CapabilityStatement declares Patient read and search and SMART security
       When Client gets from ResourceAccessProvider at "/metadata" as $capability

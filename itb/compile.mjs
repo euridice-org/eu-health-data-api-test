@@ -2,7 +2,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { execFileSync } from 'node:child_process';
-import { buildMatrix, describeScenario, loadRequirements, featuresDir, contentDir } from '../scripts/lib/traceability.mjs';
+import { buildMatrix, describeScenario, failureMessage, loadRequirements, featuresDir, contentDir } from '../scripts/lib/traceability.mjs';
 
 const root = path.dirname(fileURLToPath(import.meta.url));
 const build = path.join(root, 'build');
@@ -38,10 +38,11 @@ for (const source of sources) {
   if (!result.ok || report.errors.length || report.warnings.length || !report.testCases.length) {
     throw new Error(`Compilation failed: ${JSON.stringify(result)}`);
   }
-  // normalize.py adds this requirement line to each test case's description.
+  // normalize.py adds the requirement line to each test case's description and the failure message to its output.
   const descriptions = Object.fromEntries(Object.entries(matrix.scenarios)
     .filter(([, scenario]) => scenario.feature === filename)
-    .map(([id, scenario]) => [id, describeScenario(scenario, requirementsTable)]));
+    .map(([id, scenario]) => [id, { description: describeScenario(scenario, requirementsTable),
+      failure: failureMessage(id, scenario, requirementsTable) }]));
   fs.writeFileSync(path.join(out, 'descriptions.json'), JSON.stringify(descriptions, null, 2) + '\n');
   execFileSync('python3', [path.join(root, 'normalize.py'), out], { stdio: 'inherit' });
   manifest.push({ feature: filename, actor, suite: report.suite,

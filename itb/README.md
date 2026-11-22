@@ -199,6 +199,13 @@ DocumentReference.search-type.`, with a link to the specification's regulatory
 anchors. The requirement IDs are the Xt-EHR D5.1 IDs, mapped from each scenario's
 `@covers` tags in [requirements.json](../input/testing/traceability/requirements.json).
 That mapping is a draft for the specification owners to confirm.
+
+A failed test case reports a stable error code, the unmet requirement with its basis, and a
+remediation with a link, for example `EUAPI-DAP-003: requirement not met. api-provider-backendAuthRequireToken
+(EHDS Annex II §1.4, Art. 36(3)(e)): ... Remediation: ...`. The code is `EUAPI-` plus the upper-cased
+scenario id and is never renumbered or reused: a removed scenario retires its code. The
+remediation is written per requirement in `requirements.json`; the failing assertion itself is in
+the step report. See [the alignment with the draft EU DTE regulation](../DTE-ALIGNMENT.md).
 `node scripts/build-traceability.mjs` writes the matrix beside it and lists the
 requirements that have no test yet; `--check` fails when the matrix is stale or a
 `@covers` path is unmapped, and `compile` fails on an unmapped path.
