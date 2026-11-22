@@ -171,14 +171,18 @@ docker run --rm --network eu-health-data-api-itb_default \
 
 Things to know:
 
-- **The prompt cannot be pre-answered over the REST API.** A session started through
-  `POST /tests/start` fails at the paste prompt even with an `inputMapping` entry named after
-  it ("Required request elements were found that were not provided with corresponding
-  inputs", ITB 1.30.2). Run these cases from the UI. This was tested on the content cases
-  only; the other cases that prompt for a value compile to the same kind of step. Reading
-  values from a configuration property, as `baseUrl` does, works.
-- **A document is pasted, not uploaded.** The dialect's upload step yields a binary value
-  and has no decoding step, so it cannot feed the validator.
+- **A REST-started session fails at the prompt unless the prompt is skipped.** Through
+  `POST /tests/start` a case that asks for a document fails with "Required request elements
+  were found that were not provided with corresponding inputs" even when `inputMapping` names
+  the variable. ITB maps those inputs to test case variables and does not suppress the prompt.
+  On a throwaway suite, an `<interact skipped="$skipInteractions">` with a boolean variable of
+  that name, mapped to `true` next to the document, ran the case to completion for both a
+  pasted and a BASE64 binary value (valid passed, invalid failed, and a non-JSON binary failed). The
+  compiled suites here do not add that attribute yet, so run these cases from the UI.
+- **Upload works as well as paste.** The cases use paste, but the dialect's upload step feeds
+  the validator too: in the UI file chooser a valid Patient Summary passed and an invalid one
+  failed, and the same holds for a BASE64 binary over REST. Upload suits large documents
+  better than a text box.
 - **Large documents are slow.** The validator had not finished a 142 KB Patient Summary
   example after twelve minutes at full CPU, and it keeps working after the caller gives up
   (restart it to stop). Documents of 7 to 60 KB took 3 to 12 seconds, and the fixtures are
