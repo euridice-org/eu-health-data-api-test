@@ -229,8 +229,9 @@ Feature: EEHRxF Document Access Provider — ITI-67, ITI-68 and the Document Sub
       Given Client is asked for $narrowToken with "An access token that lacks every system/ scope this server protects, as 'Bearer <token>'"
       And set header "Authorization" to $narrowToken
       And set header "Content-Type" to "application/fhir+json"
+      # A valid DocumentReference (content is 1..*): a server may validate before it authorizes, and an invalid body would then be refused for that reason, not for the token.
       When Client posts to DocumentAccessProvider at "/DocumentReference" with:
         """
-        { "resourceType": "DocumentReference", "status": "current" }
+        { "resourceType": "DocumentReference", "status": "current", "content": [{ "attachment": { "contentType": "text/plain", "data": "T1RCIHN1Ym1pc3Npb24gcHJvYmU=" } }] }
         """
       Then $response.status should be one of "401, 403"
