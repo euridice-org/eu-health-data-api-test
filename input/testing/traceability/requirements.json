@@ -1,0 +1,532 @@
+{
+  "version": "0.1.0",
+  "status": "draft: the covers mapping is an unreviewed judgement and must be confirmed by the specification owners",
+  "specification": "hl7.fhir.eu.health-data-api@1.0.0-ballot",
+  "source": "https://build.fhir.org/ig/euridice-org/eu-health-data-api/en/regulatoryAnchors.html",
+  "note": "Requirement IDs are the Xt-EHR D5.1 IDs the specification itself uses. The EHDS implementing acts under Articles 15 and 36 (still in draft) will define the final requirements: when they do, change only this table and the covers mapping. D5.1 also has 6 logging-component and 5 general requirements that the specification leaves out of scope; they are not listed here and have no tests in this repository. Three sides exist: server and client (the system under test is called or calls) and producer (it produces a document that is validated).",
+  "requirements": {
+    "api-provider-general": {
+      "actor": "Access Provider",
+      "basis": "EHDS Annex II §2.1",
+      "text": "The EHR system acting as a provider SHALL provide access to its priority category data by offering an API that complies to the EHDS API specification.",
+      "remediation": {
+        "text": "Implement the EEHRxF Access Provider actor you claim (Document Access Provider and/or Resource Access Provider) and serve its CapabilityStatement at [base]/metadata.",
+        "page": "actors.html"
+      }
+    },
+    "api-provider-backendAuthDiscovery": {
+      "actor": "Access Provider",
+      "basis": "EHDS Annex II §1.4, Art. 36(3)(e)",
+      "text": "The EHR system Interoperability Software Component SHALL enable discovery of its authorization server information to enable a consumer to retrieve authorization.",
+      "remediation": {
+        "text": "Serve SMART configuration at [base]/.well-known/smart-configuration and declare SMART-on-FHIR in CapabilityStatement.rest.security.",
+        "page": "authorization.html#authorization-server-discovery"
+      }
+    },
+    "api-provider-backendAuthProvideToken": {
+      "actor": "Access Provider",
+      "basis": "EHDS Annex II §1.4, Art. 36(3)(e)",
+      "text": "The EHR system Interoperability Software Component SHALL support issuing authorization tokens to consumer EHR systems.",
+      "remediation": {
+        "text": "Provide a token endpoint for SMART Backend Services: the client_credentials grant with a signed JWT client assertion (ITI-71).",
+        "page": "authorization.html#get-access-token"
+      }
+    },
+    "api-provider-backendAuthRequireToken": {
+      "actor": "Access Provider",
+      "basis": "EHDS Annex II §1.4, Art. 36(3)(e)",
+      "text": "The EHR system Interoperability Software Component SHALL require a valid authorization token from the Consumer EHR on Interoperability Component exchange.",
+      "remediation": {
+        "text": "Answer a request without a valid bearer token, or with a token that lacks the system scope it needs, with 401 or 403 and an OperationOutcome, and declare SMART-on-FHIR in CapabilityStatement.rest.security.",
+        "page": "authorization.html#incorporate-access-token"
+      }
+    },
+    "api-provider-patient": {
+      "actor": "Access Provider",
+      "basis": "EHDS Annex II §2.1",
+      "text": "The EHR system Interoperability Software Component SHOULD offer a patient lookup API.",
+      "remediation": {
+        "text": "Offer Patient read and the Patient searches your CapabilityStatement names (PDQm ITI-78). Patient is a SHOULD: a server without it answers 404 or 501.",
+        "page": "actors.html"
+      }
+    },
+    "api-provider-doc": {
+      "actor": "Access Provider",
+      "basis": "EHDS Annex II §2.1",
+      "text": "The EHR system Interoperability Software Component SHALL offer an API that enables an external system to access and retrieve its priority category data modelled as FHIR Documents.",
+      "remediation": {
+        "text": "Offer MHD ITI-67 (DocumentReference search by patient, category and type) and ITI-68 (retrieve the document by Binary read, returning the raw document for its media type).",
+        "page": "document-exchange.html"
+      }
+    },
+    "api-provider-resource": {
+      "actor": "Access Provider",
+      "basis": "EHDS Annex II §2.1",
+      "text": "The EHR system Interoperability Software Component SHALL offer search and read access via individual FHIR Resource API(s).",
+      "remediation": {
+        "text": "Offer read and search-by-patient for each resource type you serve (IPA).",
+        "page": "resource-access.html"
+      }
+    },
+    "api-consumer-general": {
+      "actor": "Consumer",
+      "basis": "EHDS Annex II §2.2",
+      "text": "The EHR system Interoperability Software Component acting as a consumer SHALL consume external priority category data via an API conforming to the EHDS API specification.",
+      "remediation": {
+        "text": "Implement the EEHRxF Consumer actor you claim (Document Consumer and/or Resource Consumer).",
+        "page": "actors.html"
+      }
+    },
+    "api-consumer-backendAuthObtainToken": {
+      "actor": "Consumer",
+      "basis": "EHDS Annex II §1.4, Art. 36(3)(e)",
+      "text": "The EHR system Interoperability Software Component SHALL obtain an authorization token from the provider's designated authorization server.",
+      "remediation": {
+        "text": "Obtain a token from the provider's token endpoint with the client_credentials grant and a signed JWT client assertion (RFC 7523), and obtain a fresh token after a 401.",
+        "page": "authorization.html#get-access-token"
+      }
+    },
+    "api-consumer-backendAuthPresentToken": {
+      "actor": "Consumer",
+      "basis": "EHDS Annex II §1.4, Art. 36(3)(e)",
+      "text": "The EHR system Interoperability Software Component SHALL present a valid token to the Provider EHR on Interoperability Component Exchange.",
+      "remediation": {
+        "text": "Send the header Authorization: Bearer <token> on every request.",
+        "page": "authorization.html#incorporate-access-token"
+      }
+    },
+    "api-consumer-patient": {
+      "actor": "Consumer",
+      "basis": "EHDS Annex II §2.2",
+      "text": "The EHR system Interoperability Software Component SHALL support an external patient lookup query API.",
+      "remediation": {
+        "text": "Look the patient up with Patient search (PDQm ITI-78) using the parameters the Access Provider supports.",
+        "page": "actors.html"
+      }
+    },
+    "api-consumer-doc": {
+      "actor": "Consumer",
+      "basis": "EHDS Annex II §2.2",
+      "text": "The EHR system Interoperability Software Component SHALL support an external document query API.",
+      "remediation": {
+        "text": "Query documents with ITI-67 (search by patient, category or type) and retrieve them with ITI-68.",
+        "page": "document-exchange.html"
+      }
+    },
+    "api-consumer-resource": {
+      "actor": "Consumer",
+      "basis": "EHDS Annex II §2.2",
+      "text": "The EHR system Interoperability Software Component SHALL support an external resource query API.",
+      "remediation": {
+        "text": "Query individual resources with search by patient (IPA).",
+        "page": "resource-access.html"
+      }
+    },
+    "api-producer-data": {
+      "actor": "Any system providing data",
+      "basis": "EHDS Annex II 2.1, 2.4",
+      "text": "The EHR system SHALL be capable of providing priority category data that conforms to the EEHRxF data format.",
+      "remediation": {
+        "text": "Produce documents that conform to the priority category's HL7 Europe content profile, and check them against that content IG before exchange.",
+        "page": "priority-categories.html"
+      }
+    },
+    "api-consumer-data": {
+      "actor": "Any system receiving data",
+      "basis": "EHDS Annex II §2.2",
+      "text": "The EHR system SHALL be able to receive and handle data conforming to the EEHRxF data format.",
+      "remediation": {
+        "text": "Accept and process documents that conform to the EEHRxF content profiles.",
+        "page": "priority-categories.html"
+      }
+    },
+    "api-backendEncryption": {
+      "actor": "All",
+      "basis": "EHDS Annex II §1.4, Art. 36(3)(e)",
+      "text": "The EHR system Interoperability Component SHALL be capable of transport-encrypted data exchange.",
+      "remediation": {
+        "text": "Use TLS 1.2 or higher for every exchange.",
+        "page": "authorization.html#transport-security"
+      }
+    }
+  },
+  "covers": {
+    "CapabilityStatement.rest.resource.DocumentReference": {
+      "server": [
+        "api-provider-general",
+        "api-provider-doc"
+      ]
+    },
+    "CapabilityStatement.rest.resource.Binary": {
+      "server": [
+        "api-provider-general",
+        "api-provider-doc"
+      ]
+    },
+    "CapabilityStatement.rest.resource.Patient": {
+      "server": [
+        "api-provider-resource"
+      ]
+    },
+    "CapabilityStatement.rest.security": {
+      "server": [
+        "api-provider-backendAuthRequireToken"
+      ]
+    },
+    "security.authorization": {
+      "server": [
+        "api-provider-backendAuthRequireToken"
+      ],
+      "client": [
+        "api-consumer-backendAuthObtainToken"
+      ]
+    },
+    "security.scope": {
+      "server": [
+        "api-provider-backendAuthRequireToken"
+      ]
+    },
+    "security.smart-backend-services": {
+      "client": [
+        "api-consumer-backendAuthObtainToken"
+      ]
+    },
+    "security.tls": {
+      "server": [
+        "api-backendEncryption"
+      ],
+      "client": [
+        "api-backendEncryption"
+      ]
+    },
+    "content.patient-summary": {
+      "producer": [
+        "api-producer-data"
+      ]
+    },
+    "content.laboratory-report": {
+      "producer": [
+        "api-producer-data"
+      ]
+    },
+    "content.discharge-report": {
+      "producer": [
+        "api-producer-data"
+      ]
+    },
+    "DocumentReference.search-type": {
+      "server": [
+        "api-provider-doc"
+      ],
+      "client": [
+        "api-consumer-doc"
+      ]
+    },
+    "DocumentReference.read": {
+      "server": [
+        "api-provider-doc"
+      ],
+      "client": [
+        "api-consumer-doc"
+      ]
+    },
+    "Binary.read": {
+      "server": [
+        "api-provider-doc"
+      ],
+      "client": [
+        "api-consumer-doc"
+      ]
+    },
+    "DocumentReference.create": {
+      "server": [],
+      "client": [
+        "api-provider-general"
+      ],
+      "note": "Server side: the Document Submission Option, which the specification states is not required to satisfy any D5.1 requirement. Client side: the Delegated Access Option, the Document Publisher satisfying §2.1 by publishing to an Access Provider.",
+      "remediation": {
+        "server": {
+          "text": "This is the Document Submission Option, which is optional. If you claim it, accept Simplified Publish (ITI-105) and refuse malformed or unauthorized submissions. If you do not, do not declare create on DocumentReference.",
+          "page": "actors.html#document-submission-option"
+        }
+      }
+    },
+    "Patient.read": {
+      "server": [
+        "api-provider-patient"
+      ],
+      "client": [
+        "api-consumer-patient"
+      ]
+    },
+    "Patient.search-type": {
+      "server": [
+        "api-provider-patient"
+      ],
+      "client": [
+        "api-consumer-patient"
+      ]
+    },
+    "Patient.search.id": {
+      "server": [
+        "api-provider-patient"
+      ],
+      "client": [
+        "api-consumer-patient"
+      ]
+    },
+    "Patient.search.identifier": {
+      "server": [
+        "api-provider-patient"
+      ],
+      "client": [
+        "api-consumer-patient"
+      ]
+    },
+    "Patient.search.active": {
+      "server": [
+        "api-provider-patient"
+      ],
+      "client": [
+        "api-consumer-patient"
+      ]
+    },
+    "Patient.search.birthdate": {
+      "server": [
+        "api-provider-patient"
+      ],
+      "client": [
+        "api-consumer-patient"
+      ]
+    },
+    "Patient.search.family": {
+      "server": [
+        "api-provider-patient"
+      ],
+      "client": [
+        "api-consumer-patient"
+      ]
+    },
+    "Patient.search.gender": {
+      "server": [
+        "api-provider-patient"
+      ],
+      "client": [
+        "api-consumer-patient"
+      ]
+    },
+    "Patient.search.given": {
+      "server": [
+        "api-provider-patient"
+      ],
+      "client": [
+        "api-consumer-patient"
+      ]
+    },
+    "AllergyIntolerance.search-type": {
+      "server": [
+        "api-provider-resource"
+      ],
+      "client": [
+        "api-consumer-resource"
+      ]
+    },
+    "AllergyIntolerance.search.patient": {
+      "server": [
+        "api-provider-resource"
+      ],
+      "client": [
+        "api-consumer-resource"
+      ]
+    },
+    "Condition.read": {
+      "server": [
+        "api-provider-resource"
+      ],
+      "client": [
+        "api-consumer-resource"
+      ]
+    },
+    "Condition.search-type": {
+      "server": [
+        "api-provider-resource"
+      ],
+      "client": [
+        "api-consumer-resource"
+      ]
+    },
+    "Condition.search.patient": {
+      "server": [
+        "api-provider-resource"
+      ],
+      "client": [
+        "api-consumer-resource"
+      ]
+    },
+    "DiagnosticReport.search-type": {
+      "server": [
+        "api-provider-resource"
+      ],
+      "client": [
+        "api-consumer-resource"
+      ]
+    },
+    "DiagnosticReport.search.patient": {
+      "server": [
+        "api-provider-resource"
+      ],
+      "client": [
+        "api-consumer-resource"
+      ]
+    },
+    "Encounter.search-type": {
+      "server": [
+        "api-provider-resource"
+      ],
+      "client": [
+        "api-consumer-resource"
+      ]
+    },
+    "Encounter.search.patient": {
+      "server": [
+        "api-provider-resource"
+      ],
+      "client": [
+        "api-consumer-resource"
+      ]
+    },
+    "ImagingStudy.search-type": {
+      "server": [
+        "api-provider-resource"
+      ],
+      "client": [
+        "api-consumer-resource"
+      ]
+    },
+    "ImagingStudy.search.patient": {
+      "server": [
+        "api-provider-resource"
+      ],
+      "client": [
+        "api-consumer-resource"
+      ]
+    },
+    "Immunization.search-type": {
+      "server": [
+        "api-provider-resource"
+      ],
+      "client": [
+        "api-consumer-resource"
+      ]
+    },
+    "Immunization.search.patient": {
+      "server": [
+        "api-provider-resource"
+      ],
+      "client": [
+        "api-consumer-resource"
+      ]
+    },
+    "MedicationDispense.search-type": {
+      "server": [
+        "api-provider-resource"
+      ],
+      "client": [
+        "api-consumer-resource"
+      ]
+    },
+    "MedicationDispense.search.patient": {
+      "server": [
+        "api-provider-resource"
+      ],
+      "client": [
+        "api-consumer-resource"
+      ]
+    },
+    "MedicationRequest.search-type": {
+      "server": [
+        "api-provider-resource"
+      ],
+      "client": [
+        "api-consumer-resource"
+      ]
+    },
+    "MedicationRequest.search.patient": {
+      "server": [
+        "api-provider-resource"
+      ],
+      "client": [
+        "api-consumer-resource"
+      ]
+    },
+    "MedicationStatement.search-type": {
+      "server": [
+        "api-provider-resource"
+      ],
+      "client": [
+        "api-consumer-resource"
+      ]
+    },
+    "MedicationStatement.search.patient": {
+      "server": [
+        "api-provider-resource"
+      ],
+      "client": [
+        "api-consumer-resource"
+      ]
+    },
+    "Observation.read": {
+      "server": [
+        "api-provider-resource"
+      ],
+      "client": [
+        "api-consumer-resource"
+      ]
+    },
+    "Observation.search-type": {
+      "server": [
+        "api-provider-resource"
+      ],
+      "client": [
+        "api-consumer-resource"
+      ]
+    },
+    "Observation.search.category": {
+      "server": [
+        "api-provider-resource"
+      ],
+      "client": [
+        "api-consumer-resource"
+      ]
+    },
+    "Observation.search.code": {
+      "server": [
+        "api-provider-resource"
+      ],
+      "client": [
+        "api-consumer-resource"
+      ]
+    },
+    "Observation.search.date": {
+      "server": [
+        "api-provider-resource"
+      ],
+      "client": [
+        "api-consumer-resource"
+      ]
+    },
+    "Observation.search.patient": {
+      "server": [
+        "api-provider-resource"
+      ],
+      "client": [
+        "api-consumer-resource"
+      ]
+    }
+  },
+  "errorCodes": {
+    "prefix": "EUAPI",
+    "rule": "The code is the prefix and the upper-cased scenario id (dap-003 gives EUAPI-DAP-003). A scenario id is never renumbered or reused: a removed scenario retires its code."
+  },
+  "remediationBase": "https://build.fhir.org/ig/euridice-org/eu-health-data-api/en/"
+}

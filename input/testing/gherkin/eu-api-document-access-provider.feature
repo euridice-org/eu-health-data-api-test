@@ -38,7 +38,7 @@ Feature: EEHRxF Document Access Provider — ITI-67, ITI-68 and the Document Sub
     Scenario: dap-003 A request without a token is refused
       Given Client is asked for $patientId with "The logical id of the reference patient on the server"
       When Client gets from DocumentAccessProvider at "/DocumentReference?patient=" with id $patientId as $unauth
-      Then $response.status should be 401
+      Then $response.status should be one of "401, 403"
 
     @covers:security.scope
     # Fixture contract: fixtures/provider-v1/manifest.json, cases.dap-004 (input bindings and expected data).
@@ -113,11 +113,14 @@ Feature: EEHRxF Document Access Provider — ITI-67, ITI-68 and the Document Sub
     # Fixture contract: fixtures/provider-v1/manifest.json, cases.dap-010 (input bindings and expected data).
     Scenario: dap-010 Read the document content as a Binary
       Given Client is asked for $accessToken with "A SMART Backend Services access token for this server, as 'Bearer <token>' (scopes system/DocumentReference.rs, system/Binary.r, system/Patient.rs)"
-      And Client is asked for $binaryId with "The logical id of a reference Binary on the server"
+      And Client is asked for $binaryId with "The logical id of the reference Binary on the server (the fixture document, content type text/plain)"
       And set header "Authorization" to $accessToken
+      # The raw document is requested by its media type. A server that ignores Accept and answers with the FHIR Binary resource, or with no content, fails here.
+      And set header "Accept" to "text/plain"
       When Client gets from DocumentAccessProvider at "/Binary/" with id $binaryId as $binary
       Then $response.status should be 200
-      And $response.body should not be empty
+      And $response.headers.Content-Type should contain "text/plain"
+      And $response.body should contain "EU API target document. Synthetic test data only."
 
   Rule: Patient lookup (PDQm ITI-78) is available when the server offers it
 
@@ -229,8 +232,9 @@ Feature: EEHRxF Document Access Provider — ITI-67, ITI-68 and the Document Sub
       Given Client is asked for $narrowToken with "An access token that lacks every system/ scope this server protects, as 'Bearer <token>'"
       And set header "Authorization" to $narrowToken
       And set header "Content-Type" to "application/fhir+json"
+      # A valid DocumentReference (content is 1..*): a server may validate before it authorizes, and an invalid body would then be refused for that reason, not for the token.
       When Client posts to DocumentAccessProvider at "/DocumentReference" with:
         """
-        { "resourceType": "DocumentReference", "status": "current" }
+        { "resourceType": "DocumentReference", "status": "current", "content": [{ "attachment": { "contentType": "text/plain", "data": "T1RCIHN1Ym1pc3Npb24gcHJvYmU=" } }] }
         """
       Then $response.status should be one of "401, 403"

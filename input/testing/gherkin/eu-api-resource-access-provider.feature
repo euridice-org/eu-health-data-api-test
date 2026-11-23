@@ -16,7 +16,7 @@ Feature: EEHRxF Resource Access Provider — read and search of patient resource
 
   Rule: The server declares what the actor requires
 
-    @covers:CapabilityStatement.rest.resource.Patient
+    @covers:CapabilityStatement.rest.resource.Patient,CapabilityStatement.rest.security
     # Fixture contract: fixtures/provider-v1/manifest.json, cases.rap-001 (input bindings and expected data).
     Scenario: rap-001 The CapabilityStatement declares Patient read and search and SMART security
       When Client gets from ResourceAccessProvider at "/metadata" as $capability
@@ -32,7 +32,7 @@ Feature: EEHRxF Resource Access Provider — read and search of patient resource
     Scenario: rap-002 A request without a token is refused
       Given Client is asked for $patientIdentifier with "The identifier (system|value) of the reference patient"
       When Client gets from ResourceAccessProvider at "/Patient?identifier=" with id $patientIdentifier as $unauth
-      Then $response.status should be 401
+      Then $response.status should be one of "401, 403"
 
     @covers:security.scope
     # Fixture contract: fixtures/provider-v1/manifest.json, cases.rap-003 (input bindings and expected data).

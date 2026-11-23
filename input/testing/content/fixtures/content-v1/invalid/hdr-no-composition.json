@@ -1,0 +1,242 @@
+{
+  "resourceType": "Bundle",
+  "id": "HDR-Paolo-Marcheschi-Example",
+  "meta": {
+    "profile": [
+      "http://hl7.eu/fhir/hdr/StructureDefinition/bundle-eu-hdr"
+    ]
+  },
+  "language": "it",
+  "identifier": {
+    "type": {
+      "coding": [
+        {
+          "system": "http://terminology.hl7.org/CodeSystem/v2-0203",
+          "code": "PRN"
+        }
+      ]
+    },
+    "system": "https://content-v1.eu-api-test.invalid/eu/identifier",
+    "value": "9ea3fdb2-155c-4da7-9fce-4f24da356e13"
+  },
+  "type": "document",
+  "timestamp": "2025-02-02T14:00:00Z",
+  "entry": [
+    {
+      "fullUrl": "urn:uuid:445a0ff8-556d-4be2-bdde-6de668edf019",
+      "resource": {
+        "resourceType": "Patient",
+        "id": "445a0ff8-556d-4be2-bdde-6de668edf019",
+        "meta": {
+          "profile": [
+            "http://hl7.eu/fhir/base/StructureDefinition/patient-eu-core"
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\"><a name=\"Patient_445a0ff8-556d-4be2-bdde-6de668edf019\"> </a><p class=\"res-header-id\"><b>Generated Narrative: Patient 445a0ff8-556d-4be2-bdde-6de668edf019</b></p><a name=\"445a0ff8-556d-4be2-bdde-6de668edf019\"> </a><a name=\"hc445a0ff8-556d-4be2-bdde-6de668edf019\"> </a><div style=\"display: inline-block; background-color: #d9e0e7; padding: 6px; margin: 4px; border: 1px solid #8da1b4; border-radius: 5px; line-height: 60%\"><p style=\"margin-bottom: 0px\"/><p style=\"margin-bottom: 0px\">Profile: <a href=\"http://hl7.eu/fhir/base/2.0.1/StructureDefinition-patient-eu-core.html\">Patient (EU core)</a></p></div><p style=\"border: 1px #661aff solid; background-color: #e6e6ff; padding: 10px;\">Paolo Marcheschi Male, DoB: 1990-01-01 ( National unique individual identifier: 9977-888840-8)</p><hr/><table class=\"grid\"><tr><td style=\"background-color: #f3f5da\" title=\"Known Marital status of Patient\">Marital Status:</td><td colspan=\"3\"><span title=\"Codes:{http://terminology.hl7.org/CodeSystem/v3-MaritalStatus M}\">Married</span></td></tr><tr><td style=\"background-color: #f3f5da\" title=\"Ways to contact the Patient\">Contact Detail</td><td colspan=\"3\"><ul><li><a href=\"tel:+390503152822\">+39 0503152822</a></li><li>Piazza di Nopaziene 4 Pisa 57126 Italy (home)</li></ul></td></tr><tr><td style=\"background-color: #f3f5da\" title=\"Language spoken\">Language:</td><td colspan=\"3\"><span title=\"Codes:{urn:ietf:bcp:47 it-IT}\">Italian (Italy)</span></td></tr></table></div>"
+        },
+        "identifier": [
+          {
+            "type": {
+              "coding": [
+                {
+                  "system": "http://terminology.hl7.org/CodeSystem/v2-0203",
+                  "code": "NI"
+                }
+              ]
+            },
+            "system": "https://hl7europe.org/example-identifier",
+            "value": "9977-888840-8"
+          }
+        ],
+        "name": [
+          {
+            "text": "Paolo Marcheschi",
+            "family": "Marcheschi",
+            "given": [
+              "Paolo"
+            ]
+          }
+        ],
+        "telecom": [
+          {
+            "system": "phone",
+            "value": "+39 0503152822"
+          }
+        ],
+        "gender": "male",
+        "birthDate": "1990-01-01",
+        "address": [
+          {
+            "use": "home",
+            "type": "physical",
+            "line": [
+              "Piazza di Nopaziene 4"
+            ],
+            "city": "Pisa",
+            "postalCode": "57126",
+            "country": "Italy"
+          }
+        ],
+        "maritalStatus": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-MaritalStatus",
+              "code": "M"
+            }
+          ]
+        },
+        "communication": [
+          {
+            "language": {
+              "coding": [
+                {
+                  "system": "urn:ietf:bcp:47",
+                  "code": "it-IT"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:e4d7ab9d-2b9c-42f8-95ef-08ff5e260a8e",
+      "resource": {
+        "resourceType": "Encounter",
+        "id": "e4d7ab9d-2b9c-42f8-95ef-08ff5e260a8e",
+        "meta": {
+          "profile": [
+            "http://hl7.eu/fhir/hdr/StructureDefinition/encounter-eu-hdr"
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\"><a name=\"Encounter_e4d7ab9d-2b9c-42f8-95ef-08ff5e260a8e\"> </a><p class=\"res-header-id\"><b>Generated Narrative: Encounter e4d7ab9d-2b9c-42f8-95ef-08ff5e260a8e</b></p><a name=\"e4d7ab9d-2b9c-42f8-95ef-08ff5e260a8e\"> </a><a name=\"hce4d7ab9d-2b9c-42f8-95ef-08ff5e260a8e\"> </a><div style=\"display: inline-block; background-color: #d9e0e7; padding: 6px; margin: 4px; border: 1px solid #8da1b4; border-radius: 5px; line-height: 60%\"><p style=\"margin-bottom: 0px\"/><p style=\"margin-bottom: 0px\">Profile: <a href=\"StructureDefinition-encounter-eu-hdr.html\">Encounter (HDR)</a></p></div><p><b>status</b>: Finished</p><p><b>class</b>: <a href=\"http://terminology.hl7.org/7.4.0/CodeSystem-v3-ActCode.html#v3-ActCode-IMP\">ActCode: IMP</a> (inpatient encounter)</p><p><b>subject</b>: <a href=\"Bundle-HDR-Paolo-Marcheschi-Example.html#urn-uuid-445a0ff8-556d-4be2-bdde-6de668edf019\">Paolo Marcheschi Male, DoB: 1990-01-01 ( National unique individual identifier: 9977-888840-8)</a></p><p><b>period</b>: 2025-01-21 10:00:00+0000 --&gt; 2025-02-02 09:00:00+0000</p></div>"
+        },
+        "status": "finished",
+        "class": {
+          "system": "http://terminology.hl7.org/CodeSystem/v3-ActCode",
+          "code": "IMP",
+          "display": "inpatient encounter"
+        },
+        "subject": {
+          "reference": "urn:uuid:445a0ff8-556d-4be2-bdde-6de668edf019"
+        },
+        "period": {
+          "start": "2025-01-21T10:00:00Z",
+          "end": "2025-02-02T09:00:00Z"
+        }
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:b61b7a93-2965-427a-96b9-972ac7d89997",
+      "resource": {
+        "resourceType": "Practitioner",
+        "id": "b61b7a93-2965-427a-96b9-972ac7d89997",
+        "meta": {
+          "profile": [
+            "http://hl7.eu/fhir/base/StructureDefinition/practitioner-eu-core"
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\"><a name=\"Practitioner_b61b7a93-2965-427a-96b9-972ac7d89997\"> </a><p class=\"res-header-id\"><b>Generated Narrative: Practitioner b61b7a93-2965-427a-96b9-972ac7d89997</b></p><a name=\"b61b7a93-2965-427a-96b9-972ac7d89997\"> </a><a name=\"hcb61b7a93-2965-427a-96b9-972ac7d89997\"> </a><div style=\"display: inline-block; background-color: #d9e0e7; padding: 6px; margin: 4px; border: 1px solid #8da1b4; border-radius: 5px; line-height: 60%\"><p style=\"margin-bottom: 0px\"/><p style=\"margin-bottom: 0px\">Profile: <a href=\"http://hl7.eu/fhir/base/2.0.1/StructureDefinition-practitioner-eu-core.html\">Practitioner (EU core)</a></p></div><p style=\"border: 1px #661aff solid; background-color: #e6e6ff; padding: 10px;\">Ftgm Dottore (12345)</p><hr/><table class=\"grid\"><tr><td style=\"background-color: #f3f5da\" title=\"Ways to contact the Practitioner\">Contact Detail</td><td colspan=\"3\"><ul><li><a href=\"mailto:dottore@ftgm.it\">dottore@ftgm.it</a></li><li><a href=\"mailto:dottore.ftgm@ftgm.it\">dottore.ftgm@ftgm.it</a></li></ul></td></tr></table></div>"
+        },
+        "identifier": [
+          {
+            "value": "12345"
+          }
+        ],
+        "name": [
+          {
+            "family": "Dottore",
+            "given": [
+              "Ftgm"
+            ]
+          }
+        ],
+        "telecom": [
+          {
+            "system": "email",
+            "value": "dottore@ftgm.it"
+          },
+          {
+            "system": "email",
+            "value": "dottore.ftgm@ftgm.it"
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:57b3eb50-9187-4b5d-acd1-9e793c734bc0",
+      "resource": {
+        "resourceType": "Organization",
+        "id": "57b3eb50-9187-4b5d-acd1-9e793c734bc0",
+        "meta": {
+          "profile": [
+            "http://hl7.eu/fhir/base/StructureDefinition/organization-eu-core"
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\"><a name=\"Organization_57b3eb50-9187-4b5d-acd1-9e793c734bc0\"> </a><p class=\"res-header-id\"><b>Generated Narrative: Organization 57b3eb50-9187-4b5d-acd1-9e793c734bc0</b></p><a name=\"57b3eb50-9187-4b5d-acd1-9e793c734bc0\"> </a><a name=\"hc57b3eb50-9187-4b5d-acd1-9e793c734bc0\"> </a><div style=\"display: inline-block; background-color: #d9e0e7; padding: 6px; margin: 4px; border: 1px solid #8da1b4; border-radius: 5px; line-height: 60%\"><p style=\"margin-bottom: 0px\"/><p style=\"margin-bottom: 0px\">Profile: <a href=\"http://hl7.eu/fhir/base/2.0.1/StructureDefinition-organization-eu-core.html\">Organization (EU core)</a></p></div><p style=\"border: 1px #661aff solid; background-color: #e6e6ff; padding: 10px;\">FONDAZIONE GABRIELE MONASTERIO</p><hr/><table class=\"grid\"><tr><td style=\"background-color: #f3f5da\" title=\"Ways to contact the organization\">Contact Detail</td><td colspan=\"3\">Via G. Moruzzi 1,  57126 Pisa Pisa 57126 </td></tr></table></div>"
+        },
+        "name": "FONDAZIONE GABRIELE MONASTERIO",
+        "address": [
+          {
+            "line": [
+              "Via G. Moruzzi 1,  57126 Pisa"
+            ],
+            "city": "Pisa",
+            "postalCode": "57126"
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:abddc069-eda4-44c0-bd68-37e65a7bcb74",
+      "resource": {
+        "resourceType": "Condition",
+        "id": "abddc069-eda4-44c0-bd68-37e65a7bcb74",
+        "meta": {
+          "profile": [
+            "http://hl7.eu/fhir/base/StructureDefinition/condition-eu-core"
+          ]
+        },
+        "language": "it-IT",
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\" xml:lang=\"it-IT\" lang=\"it-IT\"><a name=\"Condition_abddc069-eda4-44c0-bd68-37e65a7bcb74\"> </a><p class=\"res-header-id\"><b>Generated Narrative: Condition abddc069-eda4-44c0-bd68-37e65a7bcb74</b></p><a name=\"abddc069-eda4-44c0-bd68-37e65a7bcb74\"> </a><a name=\"hcabddc069-eda4-44c0-bd68-37e65a7bcb74\"> </a><div style=\"display: inline-block; background-color: #d9e0e7; padding: 6px; margin: 4px; border: 1px solid #8da1b4; border-radius: 5px; line-height: 60%\"><p style=\"margin-bottom: 0px\">Language: it-IT</p><p style=\"margin-bottom: 0px\">Profile: <a href=\"http://hl7.eu/fhir/base/2.0.1/StructureDefinition-condition-eu-core.html\">Condition (EU core)</a></p></div><p><b>clinicalStatus</b>: <span title=\"Codes:{http://terminology.hl7.org/CodeSystem/condition-clinical active}\">Active</span></p><p><b>code</b>: <span title=\"Codes:{http://hl7.org/fhir/sid/icd-10 J96.0}, {http://snomed.info/sct 65710008}\">Acute respiratory failure</span></p><p><b>subject</b>: <a href=\"Bundle-HDR-Paolo-Marcheschi-Example.html#urn-uuid-445a0ff8-556d-4be2-bdde-6de668edf019\">Paolo Marcheschi Male, DoB: 1990-01-01 ( National unique individual identifier: 9977-888840-8)</a></p><p><b>onset</b>: 2025-01-10</p></div>"
+        },
+        "clinicalStatus": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/condition-clinical",
+              "code": "active"
+            }
+          ]
+        },
+        "code": {
+          "coding": [
+            {
+              "system": "http://hl7.org/fhir/sid/icd-10",
+              "code": "J96.0",
+              "display": "Acute respiratory failure"
+            },
+            {
+              "system": "http://snomed.info/sct",
+              "code": "65710008",
+              "display": "Acute respiratory failure"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "urn:uuid:445a0ff8-556d-4be2-bdde-6de668edf019"
+        },
+        "onsetDateTime": "2025-01-10"
+      }
+    }
+  ]
+}

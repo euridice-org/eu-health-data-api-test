@@ -26,7 +26,7 @@ Description: "Test plan for the Resource Access Provider actor of EU Health Data
 Test plan for the **Resource Access Provider** actor of [EU Health Data API, 1.0.0-ballot](https://build.fhir.org/ig/euridice-org/eu-health-data-api/).
 The SUT serves individual FHIR resources for a patient, behind SMART Backend Services.
 Each `suite` below is a `Rule:` of the Gherkin feature named by `suite.input.file`, and each `suite.test` one of its `Scenario:` lines, matched by the scenario's identifier. The assertions are the scenario's `Then` steps, verbatim.
-The tests declare which specification obligations they cover (34 requirement paths named by the feature tags).
+The tests declare which specification obligations they cover (35 requirement paths named by the feature tags).
 Fixture prerequisites, input bindings and expected data are in tests/fixtures/provider-v1/manifest.json, keyed by scenario ID. See the Testing page, Fixture contract and expected results. Provider fixtures are R4; client workflows use the canned data embedded in their feature.
 """
 * purpose = "To declare, in a machine-readable and runnable form, which behaviours a system claiming conformance to the Resource Access Provider actor must demonstrate."
@@ -46,7 +46,7 @@ Fixture prerequisites, input bindings and expected data are in tests/fixtures/pr
     * file = "eu-api-resource-access-provider.feature"
   * test[0]
     * name = "rap-001 The CapabilityStatement declares Patient read and search and SMART security"
-    * description = "Fixture contract: fixtures/provider-v1/manifest.json, cases.rap-001 (input bindings and expected data). Covers CapabilityStatement.rest.resource.Patient."
+    * description = "Fixture contract: fixtures/provider-v1/manifest.json, cases.rap-001 (input bindings and expected data). Covers CapabilityStatement.rest.resource.Patient, CapabilityStatement.rest.security."
     * operation = #gherkin/Scenario
     * assertion[0]
       * severity = #error

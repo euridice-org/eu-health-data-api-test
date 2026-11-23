@@ -10,7 +10,7 @@ This guide declares its tests with the [TestPlan](https://build.fhir.org/ig/HL7/
 | [Document Access Provider Test Plan](TestPlan-eu-api-document-access-provider-tests.html) | [Document Access Provider](http://hl7.eu/fhir/health-data-api/ActorDefinition/document-access-provider-actor-eu-api) | 17 scenarios, 24 requirement paths named | `eu-api-document-access-provider.feature` |
 | [Document Consumer Test Plan](TestPlan-eu-api-document-consumer-tests.html) | [Document Consumer](http://hl7.eu/fhir/health-data-api/ActorDefinition/document-consumer-actor-eu-api) | 6 scenarios, 8 requirement paths named | `eu-api-document-consumer.feature` |
 | [Grouped Document Publisher/Access Provider Test Plan](TestPlan-eu-api-document-publisher-access-provider-tests.html) | [Grouped Document Publisher/Access Provider](http://hl7.eu/fhir/health-data-api/ActorDefinition/document-publisher-access-provider-actor-eu-api) | 13 scenarios, 20 requirement paths named | `eu-api-document-publisher-access-provider.feature` |
-| [Resource Access Provider Test Plan](TestPlan-eu-api-resource-access-provider-tests.html) | [Resource Access Provider](http://hl7.eu/fhir/health-data-api/ActorDefinition/resource-access-provider-actor-eu-api) | 18 scenarios, 34 requirement paths named | `eu-api-resource-access-provider.feature` |
+| [Resource Access Provider Test Plan](TestPlan-eu-api-resource-access-provider-tests.html) | [Resource Access Provider](http://hl7.eu/fhir/health-data-api/ActorDefinition/resource-access-provider-actor-eu-api) | 18 scenarios, 35 requirement paths named | `eu-api-resource-access-provider.feature` |
 | [Resource Consumer Test Plan](TestPlan-eu-api-resource-consumer-tests.html) | [Resource Consumer](http://hl7.eu/fhir/health-data-api/ActorDefinition/resource-consumer-actor-eu-api) | 7 scenarios, 11 requirement paths named | `eu-api-resource-consumer.feature` |
 
 <a name="requirements"> </a>
@@ -18,6 +18,10 @@ This guide declares its tests with the [TestPlan](https://build.fhir.org/ig/HL7/
 ### From requirements to cases
 
 The EU Health Data API states actor requirements in CapabilityStatement expectations and narrative. Each scenario names its requirement paths in @covers. These are not profile obligation extensions, and the tags alone do not prove complete coverage.
+
+The package also carries `tests/traceability/`: `requirements.json` maps each `@covers` path to the Xt-EHR D5.1 requirement it implements (for a tested server or a tested client) and to its EHDS basis, as the [specification's regulatory anchors](https://build.fhir.org/ig/euridice-org/eu-health-data-api/en/regulatoryAnchors.html) state them, and `matrix.md` and `matrix.json` are generated from it. The mapping is a draft that the specification owners have not confirmed. The matrix lists the requirements that no scenario is tagged for: discovery of the authorization server, issuing tokens, the consumer's presented token, and the content-format requirements. The six logging-component and five general D5.1 requirements, which the specification leaves out of scope, are not in the matrix and have no tests here.
+
+The package also carries `tests/content/`: a content-validation feature for the Patient Summary, Laboratory Report and Hospital Discharge Report documents a system produces, with a valid and six invalid synthetic documents per category. It has no TestPlan resource in this guide yet, because the TestPlans are generated from the six actor features.
 
 <a name="fixtures"> </a>
 

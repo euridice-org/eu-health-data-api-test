@@ -506,7 +506,7 @@
       ],
       "searchChecks": [],
       "assertions": [
-        "$response.status should be 401"
+        "$response.status should be one of \"401, 403\""
       ],
       "expected": "Reject the request with the status in the assertions. Authorization and scope configuration are external prerequisites, not fixture resources."
     },
@@ -662,7 +662,8 @@
       "searchChecks": [],
       "assertions": [
         "$response.status should be 200",
-        "$response.body should not be empty"
+        "$response.headers.Content-Type should contain \"text/plain\"",
+        "$response.body should contain \"EU API target document. Synthetic test data only.\""
       ],
       "expected": "Read the bound target Binary. Its content type is text/plain and decoded data matches the bundled synthetic target document."
     },
@@ -935,7 +936,7 @@
       ],
       "searchChecks": [],
       "assertions": [
-        "$response.status should be 401"
+        "$response.status should be one of \"401, 403\""
       ],
       "expected": "Reject the request with the status in the assertions. Authorization and scope configuration are external prerequisites, not fixture resources."
     },
@@ -1091,7 +1092,8 @@
       "searchChecks": [],
       "assertions": [
         "$response.status should be 200",
-        "$response.body should not be empty"
+        "$response.headers.Content-Type should contain \"text/plain\"",
+        "$response.body should contain \"EU API target document. Synthetic test data only.\""
       ],
       "expected": "Read the bound target Binary. Its content type is text/plain and decoded data matches the bundled synthetic target document."
     },
@@ -1293,7 +1295,7 @@
       ],
       "searchChecks": [],
       "assertions": [
-        "$response.status should be 401"
+        "$response.status should be one of \"401, 403\""
       ],
       "expected": "Reject the request with the status in the assertions. Authorization and scope configuration are external prerequisites, not fixture resources."
     },

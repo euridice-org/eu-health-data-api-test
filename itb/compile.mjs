@@ -2,9 +2,9 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { execFileSync } from 'node:child_process';
+import { buildMatrix, describeScenario, failureMessage, loadRequirements, featuresDir, contentDir } from '../scripts/lib/traceability.mjs';
 
 const root = path.dirname(fileURLToPath(import.meta.url));
-const features = path.resolve(root, '../input/testing/gherkin');
 const build = path.join(root, 'build');
 const cli = path.join(root, 'node_modules/@opentestbed/otb-gherkin/bin/otb-gherkin.mjs');
 fs.mkdirSync(build, { recursive: true });
@@ -13,9 +13,14 @@ fs.rmSync(path.join(build, 'manifest.json'), { force: true });
 execFileSync(process.execPath, [cli, 'dialects', '--installed', '--out', path.join(build, 'assets')], {
   cwd: root, stdio: 'inherit',
 });
+// Fails the build on a @covers path the requirements mapping does not know.
+const requirementsTable = loadRequirements();
+const matrix = buildMatrix({ table: requirementsTable });
 const manifest = [];
-for (const filename of fs.readdirSync(features).filter(f => f.endsWith('.feature')).sort()) {
-  const source = path.join(features, filename);
+const sources = [featuresDir, contentDir].flatMap(dir =>
+  fs.readdirSync(dir).filter(f => f.endsWith('.feature')).sort().map(f => path.join(dir, f)));
+for (const source of sources) {
+  const filename = path.basename(source);
   const text = fs.readFileSync(source, 'utf8');
   // The grouped feature's descriptive @actor tag differs from its actual
   // Gherkin SUT identifier (GroupedProvider), which ITB uses for assignment.
@@ -33,6 +38,12 @@ for (const filename of fs.readdirSync(features).filter(f => f.endsWith('.feature
   if (!result.ok || report.errors.length || report.warnings.length || !report.testCases.length) {
     throw new Error(`Compilation failed: ${JSON.stringify(result)}`);
   }
+  // normalize.py adds the requirement line to each test case's description and the failure message to its output.
+  const descriptions = Object.fromEntries(Object.entries(matrix.scenarios)
+    .filter(([, scenario]) => scenario.feature === filename)
+    .map(([id, scenario]) => [id, { description: describeScenario(scenario, requirementsTable),
+      failure: failureMessage(id, scenario, requirementsTable) }]));
+  fs.writeFileSync(path.join(out, 'descriptions.json'), JSON.stringify(descriptions, null, 2) + '\n');
   execFileSync('python3', [path.join(root, 'normalize.py'), out], { stdio: 'inherit' });
   manifest.push({ feature: filename, actor, suite: report.suite,
     testCases: report.testCases, archive: `${name}/suite.zip` });

@@ -1,0 +1,47 @@
+# Builds the ITB test-suite archives and checks them. No Docker, no test bed and
+# no implementation under test is involved: nothing here executes a conformance case.
+# On a published release the archives and their checksums are attached to it.
+name: itb-suites
+
+on:
+  push:
+    branches-ignore:
+      - 'gh-pages'
+  pull_request:
+  release:
+    types: [published]
+  workflow_dispatch:
+
+jobs:
+  suites:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Install the pinned compiler
+        run: npm ci --prefix itb --ignore-scripts --no-audit --no-fund
+      - name: Fixtures and traceability are up to date
+        run: |
+          node scripts/build-fixtures.mjs --check
+          node scripts/build-traceability.mjs --check
+      - name: Script tests
+        run: node --test scripts/*.test.mjs
+      - name: Compile the suites
+        run: npm run --prefix itb compile
+      - name: Check the compiled suites
+        run: npm run --prefix itb test
+      - name: Collect the release archives
+        run: npm run --prefix itb release
+      - uses: actions/upload-artifact@v4
+        with:
+          name: itb-suites
+          path: itb/build/release/
+      - name: Attach to the release
+        if: github.event_name == 'release'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release upload "${{ github.event.release.tag_name }}" itb/build/release/* --clobber
