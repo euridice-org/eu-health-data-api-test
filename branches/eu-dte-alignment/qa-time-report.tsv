@@ -1,0 +1,26 @@
+Source File	Size	loadResources	load	generateSnapshots	load-configure	scan	loadDepInfo	loadInfo	checkR4R4B	generateNarratives	validate	loadLists	checkConformanceResources	checkConformanceResources2	checkConformanceResources3	generateLogicalMaps	validateExpressions	scanForUsageStats	checkURLsUnique	processProvenanceDetails	translate	generate1	generate2	generateLogicals	makeDependencies	generateExampleZip	generateValidationPack	scanProfilesForR5	scanExamplesForR5
+/fsh-generated/resources/ImplementationGuide-hl7.fhir.eu.health-data-api.test.json	8890	-	0	0	0	0	0	0	6	42	0	0	0	0	0	0	0	0	0	0	0	66	64	0	0	0	2	0	0
+fsh-generated/resources/Binary-eu-api-document-access-provider-gherkin-script.json	207	20	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	13	12	0	0	0	0	0	0
+fsh-generated/resources/Binary-eu-api-document-consumer-gherkin-script.json	193	4	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	8	6	0	0	0	0	0	0
+fsh-generated/resources/Binary-eu-api-document-publisher-access-provider-gherkin-script.json	227	4	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	11	9	0	0	0	0	0	0
+fsh-generated/resources/Binary-eu-api-document-publisher-gherkin-script.json	195	2	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	8	5	0	0	0	0	0	0
+fsh-generated/resources/Binary-eu-api-resource-access-provider-gherkin-script.json	207	5	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	12	12	0	0	0	0	0	0
+fsh-generated/resources/Binary-eu-api-resource-consumer-gherkin-script.json	193	3	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	8	6	0	0	0	0	0	0
+fsh-generated/resources/TestPlan-eu-api-document-access-provider-tests.json	19631	4	0	0	0	0	0	0	2	394	0	0	0	0	0	0	0	0	0	0	0	28	32	0	0	1	1	0	1
+fsh-generated/resources/TestPlan-eu-api-document-consumer-tests.json	9655	2	0	0	0	0	0	0	2	105	0	0	0	0	0	0	0	0	0	0	0	16	18	0	0	0	1	0	0
+fsh-generated/resources/TestPlan-eu-api-document-publisher-access-provider-tests.json	15848	3	0	0	0	0	0	0	1	99	0	0	0	0	0	0	0	1	0	0	0	21	23	0	0	0	0	0	0
+fsh-generated/resources/TestPlan-eu-api-document-publisher-tests.json	10738	3	0	0	0	0	0	0	2	97	0	0	0	0	0	0	0	0	0	0	0	16	18	0	0	0	1	0	0
+fsh-generated/resources/TestPlan-eu-api-resource-access-provider-tests.json	29716	4	0	0	0	0	0	0	3	111	0	0	0	0	0	0	0	0	0	0	0	29	30	0	0	0	1	0	0
+fsh-generated/resources/TestPlan-eu-api-resource-consumer-tests.json	10078	4	0	0	0	0	0	0	1	95	0	0	0	0	0	0	0	0	0	0	0	16	18	0	0	0	1	0	0
+/fsh-generated/includes/fsh-link-references.md	1171	-	-	-	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0
+/fsh-generated/includes/menu.xml	1262	-	-	-	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+/input/data/features.yml	5	-	-	-	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+/input/pagecontent/changes.xml	635	-	-	-	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	27	0	0	0	0	0	0
+/input/pagecontent/index.md	3600	-	-	-	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	2	0	0	0	0	0	0
+/input/pagecontent/testing.md	24458	-	-	-	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	4	0	0	0	0	0	0
+/input/pagecontent/process.md	5682	-	-	-	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0
+/input/pagecontent/downloads.xml	1287	-	-	-	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	20	0	0	0	0	0	0
+/template/config	0	-	-	-	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+/template/config/_config.yml	140	-	-	-	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+/temp/pages/_includes/artifacts.xml	216	-	-	-	-	-	-	-	-	-	-	-	-	-	-	-	-	-	-	-	-	-	1	0	0	0	0	0	0
+/temp/pages/_includes/fragment-artifacts-table.html	4272	-	-	-	-	-	-	-	-	-	-	-	-	-	-	-	-	-	-	-	-	-	0	0	0	0	0	0	0

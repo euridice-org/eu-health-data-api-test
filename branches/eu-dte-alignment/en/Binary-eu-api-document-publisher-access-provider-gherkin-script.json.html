@@ -1,0 +1,319 @@
+
+
+
+
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE HTML>
+
+
+
+<html xml:lang="en" xmlns="http://www.w3.org/1999/xhtml" lang="en" dir="ltr">
+  <head>
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type"/>
+    <title>Grouped Document Publisher/Access Provider Gherkin Script - JSON Representation - EU Health Data API: TestPlans and Gherkin for the EEHRxF API actors v0.1.0</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="author" content="http://hl7.org/fhir"/>
+
+    <link href="fhir.css" rel="stylesheet"/>
+
+    <!-- Bootstrap core CSS -->
+    <link href="assets/css/bootstrap-fhir.css" rel="stylesheet"/>
+
+    <!-- Project extras -->
+    <link href="assets/css/pygments-manni.css" rel="stylesheet"/>
+    <link href="assets/css/jquery-ui.css" rel="stylesheet"/>
+  	<link href="assets/css/prism.css" rel="stylesheet" />
+    <link href="assets/css/liquid.css" rel="stylesheet" />
+    <link href="assets/css/project.css" rel="stylesheet"/>
+  	<!-- Placeholder for child template CSS declarations -->
+<!-- <link href="assets/css/hl7.css" rel="stylesheet"/> -->
+<link href="assets/css/hl7eu.css" rel="stylesheet"/>
+
+    <script type="text/javascript" src="fhir-table-scripts.js"> </script>
+    <script type="text/javascript" src="assets/js/direction-management.js"> </script>
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="assets/js/html5shiv.js"></script>
+    <script src="assets/js/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Favicons -->
+    <link rel="fhir-logo" sizes="144x144" href="assets/ico/icon-fhir-144.png"/>
+    <link rel="fhir-logo" sizes="114x114" href="assets/ico/icon-fhir-114.png"/>
+    <link rel="fhir-logo" sizes="72x72" href="assets/ico/icon-fhir-72.png"/>
+    <link rel="fhir-logo" href="assets/ico/icon-fhir-57.png"/>
+    <link rel="shortcut icon" href="assets/ico/favicon.png"/>
+  </head>
+  <body onload="document.body.style.opacity='1'">
+
+	  <script type="text/javascript" src="assets/js/prism.js"></script>
+	  <script type="text/javascript" src="assets/js/prism-fhirpath.js"></script>
+	  <script type="text/javascript" src="assets/js/prism-cql.js"></script>
+    <script type="text/javascript" src="assets/js/mermaid-init.js"></script>
+    <style type="text/css">h2{--heading-prefix:"[&quot;6.10&quot;]"}
+    h3,h4,h5,h6{--heading-prefix:"6.10"}</style>
+    <div id="segment-header" class="segment">  <!-- segment-header -->
+      <div class="container">  <!-- container -->
+
+        <!-- Left logo - typically the publisher's logo - project or affiliate -->
+        <!-- <div id="project-nav">
+          <a id="project-logo" no-external="true" href="http://hl7.it">
+            <img height="61" alt="Project home" src="assets/images/hl7-eu-logo.png"/>
+          </a>
+        </div> -->
+
+
+        <div id="project-nav">
+          <a id="project-logo" no-external="true" href="https://hl7.eu/">
+            <img height="55" alt="HL7 Europe website" src="assets/images/hl7-eu-logo.png"/> 
+          </a>
+          <a id="project-logo" no-external="true" href="https://ihe-europe.net/">
+            <img height="55" alt="IHE Europe website" src="assets/images/ihe-eu-logo.drawio.png" style="vertical-align: bottom;"/> 
+          </a>
+        </div>
+
+        <div id="family-nav">
+          <!-- <table style="float: left;" cellpadding="0" cellspacing="0">
+            <tr><td><a id="dicom-family-logo" no-external="true" href="https://dicom.nema.org/standard.htm"><img width="100" alt="HL7 Europe website" src="assets/images/DICOM.png"/> </a>
+</a></td></tr>
+            <tr><td><a id="fhir-family-logo" no-external="true" href="http://hl7.org/fhir"><img width="100"  alt="HL7 Europe website" src="assets/images/fhir-logo-www.png"/></a></td></tr>
+          </table> -->
+          <a id="project-logo" no-external="true" href="https://euridice.org/"><img height="60" alt="Euridice website" src="assets/images/EURIDICE-logo-full.png"/> </a>
+          <a id="fhir-family-logo" no-external="true" href="http://hl7.org/fhir"><img height="60"  alt="HL7 FHIR website" src="assets/images/hl7-fhir-flame.drawio.png"/></a>
+        </div>
+
+
+
+
+
+        <div id="ig-status" data-fhir="generated">
+          <p><span style="font-size:12pt;font-weight:bold">EU Health Data API: TestPlans and Gherkin for the EEHRxF API actors</span>
+            <br/>
+            <span style="display:inline-block;">0.1.0 - ci-build
+
+
+
+  World
+
+
+            </span>
+          </p>
+        </div>
+      </div> <!-- /container -->
+    </div>  <!-- /segment-header -->
+
+    <div id="segment-navbar" class="segment" data-fhir="generated">  <!-- segment-navbar -->
+      <div id="stripe"> </div>
+      <div class="container">  <!-- container -->
+        <!-- HEADER CONTENT -->
+
+        <nav class="navbar navbar-inverse">
+          <!--status-bar-->
+          <div class="container">
+
+            <button data-target=".navbar-inverse-collapse" class="navbar-toggle" data-toggle="collapse" type="button">
+              <span class="icon-bar"> </span>
+              <span class="icon-bar"> </span>
+              <span class="icon-bar"> </span>
+            </button>
+            <a class="navbar-brand hidden" href="http://hl7.org/fhir/6.0.0-ballot5/index.html">FHIR</a>
+            <div class="nav-collapse collapse navbar-inverse-collapse">
+              <!-- menu.xml  -->
+
+<ul xmlns="http://www.w3.org/1999/xhtml" class="nav navbar-nav">
+  <li>
+    <a href="index.html">Home</a>
+  </li>
+  <li>
+    <a href="testing.html">Testing</a>
+  </li>
+  <li>
+    <a href="process.html">Method</a>
+  </li>
+  <li>
+    <a href="artifacts.html">Artifacts</a>
+  </li>
+  <li>
+    <a href="downloads.html">Downloads</a>
+  </li>
+  <li>
+    <a href="changes.html">Changes</a>
+  </li>
+</ul>
+            </div>  <!-- /.nav-collapse -->
+
+              
+
+          </div>  <!-- /.container -->
+        </nav>  <!-- /.navbar -->
+      <!-- /HEADER CONTENT -->
+      </div>  <!-- /container -->
+    </div>  <!-- /segment-navbar -->
+    <!--status-bar-->
+
+    <div id="segment-breadcrumb" class="segment" data-fhir="generated">  <!-- segment-breadcrumb -->
+      <div class="container">  <!-- container -->
+        <ul class="breadcrumb">
+          <li><a href='toc.html'><b>Table of Contents</b></a></li><li><a href='artifacts.html'><b>Artifacts Summary</b></a></li><li><b>Grouped Document Publisher/Access Provider Gherkin Script</b></li>
+
+        </ul>
+      </div>  <!-- /container -->
+    </div>  <!-- /segment-breadcrumb -->
+
+    <a name="top"> </a>
+    <div id="segment-content" class="segment">  <!-- segment-content -->
+      <div class="container">  <!-- container -->
+        <div class="row">
+          <div class="inner-wrapper">
+
+<!-- layouts\layout-instance-format -->
+<div style="counter-reset: section 8" class="col-12">
+<!--ReleaseHeader--><p id="publish-box">EU Health Data API: TestPlans and Gherkin for the EEHRxF API actors, published by Jens Kristian Villadsen. This guide is not an authorized publication; it is the continuous build for version 0.1.0  built by the FHIR (HL7&reg; FHIR&reg; Standard) CI Build. This version is based on the current content of <a href='https://github.com/euridice-org/eu-health-data-api-test/tree/2/merge'>https://github.com/euridice-org/eu-health-data-api-test/tree/2/merge</a> and changes regularly. See the <a href='http://example.com/fhir/hl7.fhir.eu.health-data-api.test/history.html'>Directory of published versions</a><br/><span data-smart-ci-extra="1" style="font-size:.85em;">Built from commit <a href="https://github.com/euridice-org/eu-health-data-api-test/commit/6736be973da0391ec1c71e028b6817b98e15894e"><code>6736be97</code></a>. &nbsp; Branch: <a href="https://github.com/euridice-org/eu-health-data-api-test/tree/feature/eu-dte-alignment"><code>feature/eu-dte-alignment</code></a>.</span></p><!--EndReleaseHeader-->
+
+
+
+
+
+
+
+
+
+
+
+<ul class="nav nav-tabs">
+
+  <li>
+    <a href="Binary-eu-api-document-publisher-access-provider-gherkin-script.html">Narrative Content</a>
+  </li>
+
+
+
+  
+    <li>
+      <a href="Binary-eu-api-document-publisher-access-provider-gherkin-script.xml.html">XML</a>
+    </li>
+  
+
+
+  
+    <li class="active">
+      <a href="#">JSON</a>
+    </li>
+  
+
+
+  
+    <li>
+      <a href="Binary-eu-api-document-publisher-access-provider-gherkin-script.ttl.html">TTL</a>
+    </li>
+  
+
+
+
+</ul>
+
+
+<a name="root"> </a>
+
+
+
+<h2 id="root">: Grouped Document Publisher/Access Provider Gherkin Script</h2>
+
+
+<p><a href="Binary-eu-api-document-publisher-access-provider-gherkin-script.json" no-download="true">Raw json</a> | <a href="Binary-eu-api-document-publisher-access-provider-gherkin-script.json" download>Download</a></p>
+
+  <!-- insert intro if present -->
+  
+
+
+
+  <pre class="json" data-fhir="generated" style="white-space: pre; text-wrap: nowrap; width: auto;"><code style="white-space: pre; text-wrap: nowrap;">{
+  "<a href="http://hl7.org/fhir/6.0.0-ballot5/binary.html#XBinary">resourceType</a>" : "Binary",
+  "<a href="http://hl7.org/fhir/6.0.0-ballot5/resource.html#XBinary.id">id</a>" : "eu-api-document-publisher-access-provider-gherkin-script",
+  "<a href="http://hl7.org/fhir/6.0.0-ballot5/resource.html#XBinary.language">language</a>" : "en",
+  "<a href="http://hl7.org/fhir/6.0.0-ballot5/binary.html#XBinary.contentType">contentType</a>" : "text/x-gherkin",
+  "<a href="http://hl7.org/fhir/6.0.0-ballot5/binary.html#XBinary.data">data</a>" : "IyBFRUhSeEYgZ3JvdXBlZCBEb2N1bWVudCBQdWJsaXNoZXIvQWNjZXNzIFByb3ZpZGVyIOKAlCBobDcuZmhpci5ldS5oZWFsdGgtZGF0YS1hcGkKIyAxLjAuMC1iYWxsb3QuIFB1YmxpY2F0aW9uIChJVEktMTA1KSBpcyBpbnRlcm5hbCwgc28gb25seSBxdWVyeSBhbmQgcmV0cmlldmFsIGFyZQojIGV4cG9zZWQgKENhcGFiaWxpdHlTdGF0ZW1lbnQgZG9jdW1lbnQtcHVibGlzaGVyLWFjY2Vzcy1wcm92aWRlci1ldS1hcGkpLgpAbGFuZzppdGItY29yZS1lbkBeMiBAZGlhbGVjdDpmaGlyLXZhbGlkYXRvckBeMiBAYWN0b3I6RG9jdW1lbnRQdWJsaXNoZXJBY2Nlc3NQcm92aWRlciBAc3BlYzpobDcuZmhpci5ldS5oZWFsdGgtZGF0YS1hcGlAMS4wLjAtYmFsbG90CkZlYXR1cmU6IEVFSFJ4RiBncm91cGVkIERvY3VtZW50IFB1Ymxpc2hlci9BY2Nlc3MgUHJvdmlkZXIg4oCUIElUSS02NyBhbmQgSVRJLTY4CiAgVGhlIFNVVCBwcm9kdWNlcyBhbmQgc2VydmVzIGl0cyBvd24gZG9jdW1lbnRzOyBvbmx5IHRoZSByZWFkIHNpZGUgaXMgZXh0ZXJuYWwuCgogIEJhY2tncm91bmQ6CiAgICBHaXZlbiBHcm91cGVkUHJvdmlkZXIgaXMgdGhlIHN5c3RlbSB1bmRlciB0ZXN0IGF0ICJodHRwOi8vZWhyLmV4YW1wbGUub3JnL2ZoaXIiIGFzIGRlZmluZWQgYnkgImh0dHA6Ly9obDcuZXUvZmhpci9oZWFsdGgtZGF0YS1hcGkvQ2FwYWJpbGl0eVN0YXRlbWVudC9kb2N1bWVudC1wdWJsaXNoZXItYWNjZXNzLXByb3ZpZGVyLWV1LWFwaSIKICAgIEFuZCBDbGllbnQgaXMgaW5mcmFzdHJ1Y3R1cmUKICAgIEFuZCBGSElSVmFsaWRhdG9yIGlzIGEgZmhpci12YWxpZGF0b3IgYXQgImh0dHA6Ly9maGlyLXZhbGlkYXRvcjo4MDgwIgogICAgQW5kIHNldCBoZWFkZXIgIkFjY2VwdCIgdG8gImFwcGxpY2F0aW9uL2ZoaXIranNvbiIKCiAgUnVsZTogVGhlIHNlcnZlciBkZWNsYXJlcyB3aGF0IHRoZSBhY3RvciByZXF1aXJlcwoKICAgIEBjb3ZlcnM6Q2FwYWJpbGl0eVN0YXRlbWVudC5yZXN0LnJlc291cmNlLkRvY3VtZW50UmVmZXJlbmNlLENhcGFiaWxpdHlTdGF0ZW1lbnQucmVzdC5yZXNvdXJjZS5CaW5hcnkKICAgICMgRml4dHVyZSBjb250cmFjdDogZml4dHVyZXMvcHJvdmlkZXItdjEvbWFuaWZlc3QuanNvbiwgY2FzZXMuZ3JwLTAwMSAoaW5wdXQgYmluZGluZ3MgYW5kIGV4cGVjdGVkIGRhdGEpLgogICAgU2NlbmFyaW86IGdycC0wMDEgVGhlIENhcGFiaWxpdHlTdGF0ZW1lbnQgZGVjbGFyZXMgRG9jdW1lbnRSZWZlcmVuY2UgYW5kIEJpbmFyeQogICAgICBXaGVuIENsaWVudCBnZXRzIGZyb20gR3JvdXBlZFByb3ZpZGVyIGF0ICIvbWV0YWRhdGEiIGFzICRjYXBhYmlsaXR5CiAgICAgIFRoZW4gJHJlc3BvbnNlLnN0YXR1cyBzaG91bGQgYmUgMjAwCiAgICAgIEFuZCAkY2FwYWJpbGl0eSBhdCAiQ2FwYWJpbGl0eVN0YXRlbWVudC5yZXN0LndoZXJlKG1vZGU9J3NlcnZlcicpLnJlc291cmNlLndoZXJlKHR5cGU9J0RvY3VtZW50UmVmZXJlbmNlJykuaW50ZXJhY3Rpb24ud2hlcmUoY29kZT0nc2VhcmNoLXR5cGUnKS5leGlzdHMoKSIgc2hvdWxkIGJlIHRydWUKICAgICAgQW5kICRjYXBhYmlsaXR5IGF0ICJDYXBhYmlsaXR5U3RhdGVtZW50LnJlc3Qud2hlcmUobW9kZT0nc2VydmVyJykucmVzb3VyY2Uud2hlcmUodHlwZT0nRG9jdW1lbnRSZWZlcmVuY2UnKS5pbnRlcmFjdGlvbi53aGVyZShjb2RlPSdyZWFkJykuZXhpc3RzKCkiIHNob3VsZCBiZSB0cnVlCiAgICAgIEFuZCAkY2FwYWJpbGl0eSBhdCAiQ2FwYWJpbGl0eVN0YXRlbWVudC5yZXN0LndoZXJlKG1vZGU9J3NlcnZlcicpLnJlc291cmNlLndoZXJlKHR5cGU9J0JpbmFyeScpLmludGVyYWN0aW9uLndoZXJlKGNvZGU9J3JlYWQnKS5leGlzdHMoKSIgc2hvdWxkIGJlIHRydWUKCiAgICBAY292ZXJzOkNhcGFiaWxpdHlTdGF0ZW1lbnQucmVzdC5zZWN1cml0eQogICAgIyBGaXh0dXJlIGNvbnRyYWN0OiBmaXh0dXJlcy9wcm92aWRlci12MS9tYW5pZmVzdC5qc29uLCBjYXNlcy5ncnAtMDAyIChpbnB1dCBiaW5kaW5ncyBhbmQgZXhwZWN0ZWQgZGF0YSkuCiAgICBTY2VuYXJpbzogZ3JwLTAwMiBUaGUgQ2FwYWJpbGl0eVN0YXRlbWVudCBkZWNsYXJlcyBTTUFSVCBvbiBGSElSIHNlY3VyaXR5CiAgICAgIFdoZW4gQ2xpZW50IGdldHMgZnJvbSBHcm91cGVkUHJvdmlkZXIgYXQgIi9tZXRhZGF0YSIgYXMgJGNhcGFiaWxpdHkKICAgICAgVGhlbiAkcmVzcG9uc2Uuc3RhdHVzIHNob3VsZCBiZSAyMDAKICAgICAgQW5kICRjYXBhYmlsaXR5IGF0ICJDYXBhYmlsaXR5U3RhdGVtZW50LnJlc3Qud2hlcmUobW9kZT0nc2VydmVyJykuc2VjdXJpdHkuc2VydmljZS5jb2Rpbmcud2hlcmUoY29kZT0nU01BUlQtb24tRkhJUicpLmV4aXN0cygpIiBzaG91bGQgYmUgdHJ1ZQoKICBSdWxlOiBFdmVyeSB0cmFuc2FjdGlvbiByZXF1aXJlcyBTTUFSVCBCYWNrZW5kIFNlcnZpY2VzIGF1dGhvcml6YXRpb24KCiAgICBAY292ZXJzOnNlY3VyaXR5LmF1dGhvcml6YXRpb24KICAgICMgRml4dHVyZSBjb250cmFjdDogZml4dHVyZXMvcHJvdmlkZXItdjEvbWFuaWZlc3QuanNvbiwgY2FzZXMuZ3JwLTAwMyAoaW5wdXQgYmluZGluZ3MgYW5kIGV4cGVjdGVkIGRhdGEpLgogICAgU2NlbmFyaW86IGdycC0wMDMgQSByZXF1ZXN0IHdpdGhvdXQgYSB0b2tlbiBpcyByZWZ1c2VkCiAgICAgIEdpdmVuIENsaWVudCBpcyBhc2tlZCBmb3IgJHBhdGllbnRJZCB3aXRoICJUaGUgbG9naWNhbCBpZCBvZiB0aGUgcmVmZXJlbmNlIHBhdGllbnQgb24gdGhlIHNlcnZlciIKICAgICAgV2hlbiBDbGllbnQgZ2V0cyBmcm9tIEdyb3VwZWRQcm92aWRlciBhdCAiL0RvY3VtZW50UmVmZXJlbmNlP3BhdGllbnQ9IiB3aXRoIGlkICRwYXRpZW50SWQgYXMgJHVuYXV0aAogICAgICBUaGVuICRyZXNwb25zZS5zdGF0dXMgc2hvdWxkIGJlIG9uZSBvZiAiNDAxLCA0MDMiCgogICAgQGNvdmVyczpzZWN1cml0eS5zY29wZQogICAgIyBGaXh0dXJlIGNvbnRyYWN0OiBmaXh0dXJlcy9wcm92aWRlci12MS9tYW5pZmVzdC5qc29uLCBjYXNlcy5ncnAtMDA0IChpbnB1dCBiaW5kaW5ncyBhbmQgZXhwZWN0ZWQgZGF0YSkuCiAgICBTY2VuYXJpbzogZ3JwLTAwNCBBIHRva2VuIHdpdGggbm8gdXNhYmxlIHNjb3BlIGlzIHJlZnVzZWQKICAgICAgR2l2ZW4gQ2xpZW50IGlzIGFza2VkIGZvciAkbmFycm93VG9rZW4gd2l0aCAiQW4gYWNjZXNzIHRva2VuIHRoYXQgbGFja3MgZXZlcnkgc3lzdGVtLyBzY29wZSB0aGlzIHNlcnZlciBwcm90ZWN0cywgYXMgJ0JlYXJlciA8dG9rZW4+JyIKICAgICAgQW5kIENsaWVudCBpcyBhc2tlZCBmb3IgJHBhdGllbnRJZCB3aXRoICJUaGUgbG9naWNhbCBpZCBvZiB0aGUgcmVmZXJlbmNlIHBhdGllbnQgb24gdGhlIHNlcnZlciIKICAgICAgQW5kIHNldCBoZWFkZXIgIkF1dGhvcml6YXRpb24iIHRvICRuYXJyb3dUb2tlbgogICAgICBXaGVuIENsaWVudCBnZXRzIGZyb20gR3JvdXBlZFByb3ZpZGVyIGF0ICIvRG9jdW1lbnRSZWZlcmVuY2U/cGF0aWVudD0iIHdpdGggaWQgJHBhdGllbnRJZCBhcyAkZGVuaWVkCiAgICAgIFRoZW4gJHJlc3BvbnNlLnN0YXR1cyBzaG91bGQgYmUgb25lIG9mICI0MDEsIDQwMyIKCiAgUnVsZTogRmluZCBEb2N1bWVudCBSZWZlcmVuY2VzIFtJVEktNjddCgogICAgQGNvdmVyczpEb2N1bWVudFJlZmVyZW5jZS5zZWFyY2gtdHlwZQogICAgIyBGaXh0dXJlIGNvbnRyYWN0OiBmaXh0dXJlcy9wcm92aWRlci12MS9tYW5pZmVzdC5qc29uLCBjYXNlcy5ncnAtMDA1IChpbnB1dCBiaW5kaW5ncyBhbmQgZXhwZWN0ZWQgZGF0YSkuCiAgICBTY2VuYXJpbzogZ3JwLTAwNSBTZWFyY2ggYnkgcGF0aWVudCByZXR1cm5zIGEgc2VhcmNoc2V0IG9mIGNvbmZvcm1hbnQgRG9jdW1lbnRSZWZlcmVuY2VzCiAgICAgIEdpdmVuIENsaWVudCBpcyBhc2tlZCBmb3IgJGFjY2Vzc1Rva2VuIHdpdGggIkEgU01BUlQgQmFja2VuZCBTZXJ2aWNlcyBhY2Nlc3MgdG9rZW4gZm9yIHRoaXMgc2VydmVyLCBhcyAnQmVhcmVyIDx0b2tlbj4nIChzY29wZXMgc3lzdGVtL0RvY3VtZW50UmVmZXJlbmNlLnJzLCBzeXN0ZW0vQmluYXJ5LnIsIHN5c3RlbS9QYXRpZW50LnJzKSIKICAgICAgQW5kIENsaWVudCBpcyBhc2tlZCBmb3IgJHBhdGllbnRJZCB3aXRoICJUaGUgbG9naWNhbCBpZCBvZiB0aGUgcmVmZXJlbmNlIHBhdGllbnQgb24gdGhlIHNlcnZlciIKICAgICAgQW5kIHNldCBoZWFkZXIgIkF1dGhvcml6YXRpb24iIHRvICRhY2Nlc3NUb2tlbgogICAgICBXaGVuIENsaWVudCBnZXRzIGZyb20gR3JvdXBlZFByb3ZpZGVyIGF0ICIvRG9jdW1lbnRSZWZlcmVuY2U/cGF0aWVudD0iIHdpdGggaWQgJHBhdGllbnRJZCBhcyAkZm91bmQKICAgICAgVGhlbiAkcmVzcG9uc2Uuc3RhdHVzIHNob3VsZCBiZSAyMDAKICAgICAgQW5kICRmb3VuZCBhdCAiQnVuZGxlLnR5cGUiIHNob3VsZCBiZSAic2VhcmNoc2V0IgogICAgICBBbmQgJGZvdW5kIGF0ICJCdW5kbGUuZW50cnkucmVzb3VyY2Uub2ZUeXBlKERvY3VtZW50UmVmZXJlbmNlKS5leGlzdHMoKSIgc2hvdWxkIGJlIHRydWUKICAgICAgQW5kICRmb3VuZCBhdCAiQnVuZGxlLmVudHJ5LnJlc291cmNlLm9mVHlwZShEb2N1bWVudFJlZmVyZW5jZSkuYWxsKHN0YXR1cyA9ICdjdXJyZW50JyBvciBzdGF0dXMgPSAnc3VwZXJzZWRlZCcgb3Igc3RhdHVzID0gJ2VudGVyZWQtaW4tZXJyb3InKSIgc2hvdWxkIGJlIHRydWUKICAgICAgQW5kICRmb3VuZCBhdCAiQnVuZGxlLmVudHJ5LnJlc291cmNlLm9mVHlwZShEb2N1bWVudFJlZmVyZW5jZSkuYWxsKGNvbnRlbnQuYXR0YWNobWVudC5leGlzdHMoKSkiIHNob3VsZCBiZSB0cnVlCgogICAgQGNvdmVyczpEb2N1bWVudFJlZmVyZW5jZS5zZWFyY2gtdHlwZQogICAgIyBGaXh0dXJlIGNvbnRyYWN0OiBmaXh0dXJlcy9wcm92aWRlci12MS9tYW5pZmVzdC5qc29uLCBjYXNlcy5ncnAtMDA2IChpbnB1dCBiaW5kaW5ncyBhbmQgZXhwZWN0ZWQgZGF0YSkuCiAgICBTY2VuYXJpbzogZ3JwLTAwNiBTZWFyY2ggYnkgRUVIUnhGIHByaW9yaXR5IGNhdGVnb3J5CiAgICAgIEdpdmVuIENsaWVudCBpcyBhc2tlZCBmb3IgJGFjY2Vzc1Rva2VuIHdpdGggIkEgU01BUlQgQmFja2VuZCBTZXJ2aWNlcyBhY2Nlc3MgdG9rZW4gZm9yIHRoaXMgc2VydmVyLCBhcyAnQmVhcmVyIDx0b2tlbj4nIChzY29wZXMgc3lzdGVtL0RvY3VtZW50UmVmZXJlbmNlLnJzLCBzeXN0ZW0vQmluYXJ5LnIsIHN5c3RlbS9QYXRpZW50LnJzKSIKICAgICAgQW5kIENsaWVudCBpcyBhc2tlZCBmb3IgJHBhdGllbnRJZCB3aXRoICJUaGUgbG9naWNhbCBpZCBvZiB0aGUgcmVmZXJlbmNlIHBhdGllbnQgb24gdGhlIHNlcnZlciIKICAgICAgQW5kIHNldCBoZWFkZXIgIkF1dGhvcml6YXRpb24iIHRvICRhY2Nlc3NUb2tlbgogICAgICBXaGVuIENsaWVudCBnZXRzIGZyb20gR3JvdXBlZFByb3ZpZGVyIGF0ICIvRG9jdW1lbnRSZWZlcmVuY2U/Y2F0ZWdvcnk9aHR0cDovL2hsNy5ldS9maGlyL2hlYWx0aC1kYXRhLWFwaS9Db2RlU3lzdGVtL2VlaHJ4Zi1kb2N1bWVudC1wcmlvcml0eS1jYXRlZ29yeS1jc3xQYXRpZW50LVN1bW1hcmllcyZwYXRpZW50PSIgd2l0aCBpZCAkcGF0aWVudElkIGFzICRieUNhdGVnb3J5CiAgICAgIFRoZW4gJHJlc3BvbnNlLnN0YXR1cyBzaG91bGQgYmUgMjAwCiAgICAgIEFuZCAkYnlDYXRlZ29yeSBhdCAiQnVuZGxlLnR5cGUiIHNob3VsZCBiZSAic2VhcmNoc2V0IgogICAgICBBbmQgJGJ5Q2F0ZWdvcnkgYXQgIkJ1bmRsZS5lbnRyeS5yZXNvdXJjZS5vZlR5cGUoRG9jdW1lbnRSZWZlcmVuY2UpLmFsbChjYXRlZ29yeS5jb2Rpbmcud2hlcmUoY29kZT0nUGF0aWVudC1TdW1tYXJpZXMnKS5leGlzdHMoKSkiIHNob3VsZCBiZSB0cnVlCgogICAgQGNvdmVyczpEb2N1bWVudFJlZmVyZW5jZS5zZWFyY2gtdHlwZQogICAgIyBGaXh0dXJlIGNvbnRyYWN0OiBmaXh0dXJlcy9wcm92aWRlci12MS9tYW5pZmVzdC5qc29uLCBjYXNlcy5ncnAtMDA3IChpbnB1dCBiaW5kaW5ncyBhbmQgZXhwZWN0ZWQgZGF0YSkuCiAgICBTY2VuYXJpbzogZ3JwLTAwNyBTZWFyY2ggYnkgTE9JTkMgZG9jdW1lbnQgdHlwZQogICAgICBHaXZlbiBDbGllbnQgaXMgYXNrZWQgZm9yICRhY2Nlc3NUb2tlbiB3aXRoICJBIFNNQVJUIEJhY2tlbmQgU2VydmljZXMgYWNjZXNzIHRva2VuIGZvciB0aGlzIHNlcnZlciwgYXMgJ0JlYXJlciA8dG9rZW4+JyAoc2NvcGVzIHN5c3RlbS9Eb2N1bWVudFJlZmVyZW5jZS5ycywgc3lzdGVtL0JpbmFyeS5yLCBzeXN0ZW0vUGF0aWVudC5ycykiCiAgICAgIEFuZCBDbGllbnQgaXMgYXNrZWQgZm9yICRwYXRpZW50SWQgd2l0aCAiVGhlIGxvZ2ljYWwgaWQgb2YgdGhlIHJlZmVyZW5jZSBwYXRpZW50IG9uIHRoZSBzZXJ2ZXIiCiAgICAgIEFuZCBzZXQgaGVhZGVyICJBdXRob3JpemF0aW9uIiB0byAkYWNjZXNzVG9rZW4KICAgICAgV2hlbiBDbGllbnQgZ2V0cyBmcm9tIEdyb3VwZWRQcm92aWRlciBhdCAiL0RvY3VtZW50UmVmZXJlbmNlP3R5cGU9aHR0cDovL2xvaW5jLm9yZ3w2MDU5MS01JnBhdGllbnQ9IiB3aXRoIGlkICRwYXRpZW50SWQgYXMgJGJ5VHlwZQogICAgICBUaGVuICRyZXNwb25zZS5zdGF0dXMgc2hvdWxkIGJlIDIwMAogICAgICBBbmQgJGJ5VHlwZSBhdCAiQnVuZGxlLnR5cGUiIHNob3VsZCBiZSAic2VhcmNoc2V0IgogICAgICBBbmQgJGJ5VHlwZSBhdCAiQnVuZGxlLmVudHJ5LnJlc291cmNlLm9mVHlwZShEb2N1bWVudFJlZmVyZW5jZSkuYWxsKHR5cGUuY29kaW5nLndoZXJlKHN5c3RlbT0naHR0cDovL2xvaW5jLm9yZycgYW5kIGNvZGU9JzYwNTkxLTUnKS5leGlzdHMoKSkiIHNob3VsZCBiZSB0cnVlCgogICAgQGNvdmVyczpEb2N1bWVudFJlZmVyZW5jZS5yZWFkCiAgICAjIEZpeHR1cmUgY29udHJhY3Q6IGZpeHR1cmVzL3Byb3ZpZGVyLXYxL21hbmlmZXN0Lmpzb24sIGNhc2VzLmdycC0wMDggKGlucHV0IGJpbmRpbmdzIGFuZCBleHBlY3RlZCBkYXRhKS4KICAgIFNjZW5hcmlvOiBncnAtMDA4IFJlYWQgYSBEb2N1bWVudFJlZmVyZW5jZSBieSBpZAogICAgICBHaXZlbiBDbGllbnQgaXMgYXNrZWQgZm9yICRhY2Nlc3NUb2tlbiB3aXRoICJBIFNNQVJUIEJhY2tlbmQgU2VydmljZXMgYWNjZXNzIHRva2VuIGZvciB0aGlzIHNlcnZlciwgYXMgJ0JlYXJlciA8dG9rZW4+JyAoc2NvcGVzIHN5c3RlbS9Eb2N1bWVudFJlZmVyZW5jZS5ycywgc3lzdGVtL0JpbmFyeS5yLCBzeXN0ZW0vUGF0aWVudC5ycykiCiAgICAgIEFuZCBDbGllbnQgaXMgYXNrZWQgZm9yICRkb2N1bWVudElkIHdpdGggIlRoZSBsb2dpY2FsIGlkIG9mIGEgcmVmZXJlbmNlIERvY3VtZW50UmVmZXJlbmNlIG9uIHRoZSBzZXJ2ZXIiCiAgICAgIEFuZCBzZXQgaGVhZGVyICJBdXRob3JpemF0aW9uIiB0byAkYWNjZXNzVG9rZW4KICAgICAgV2hlbiBDbGllbnQgZ2V0cyBmcm9tIEdyb3VwZWRQcm92aWRlciBhdCAiL0RvY3VtZW50UmVmZXJlbmNlLyIgd2l0aCBpZCAkZG9jdW1lbnRJZCBhcyAkZG9jUmVmCiAgICAgIFRoZW4gJHJlc3BvbnNlLnN0YXR1cyBzaG91bGQgYmUgMjAwCiAgICAgIEFuZCAkZG9jUmVmIGF0ICJEb2N1bWVudFJlZmVyZW5jZS5pZCIgc2hvdWxkIGJlICIkZG9jdW1lbnRJZCIKICAgICAgQW5kICRkb2NSZWYgYXQgIkRvY3VtZW50UmVmZXJlbmNlLnN1YmplY3QuZXhpc3RzKCkiIHNob3VsZCBiZSB0cnVlCiAgICAgIEFuZCAkZG9jUmVmIGF0ICJEb2N1bWVudFJlZmVyZW5jZS5jb250ZW50LmF0dGFjaG1lbnQuY29udGVudFR5cGUuZXhpc3RzKCkiIHNob3VsZCBiZSB0cnVlCgogICAgQGNvdmVyczpEb2N1bWVudFJlZmVyZW5jZS5yZWFkCiAgICAjIEZpeHR1cmUgY29udHJhY3Q6IGZpeHR1cmVzL3Byb3ZpZGVyLXYxL21hbmlmZXN0Lmpzb24sIGNhc2VzLmdycC0wMDkgKGlucHV0IGJpbmRpbmdzIGFuZCBleHBlY3RlZCBkYXRhKS4KICAgIFNjZW5hcmlvOiBncnAtMDA5IEFuIHVua25vd24gRG9jdW1lbnRSZWZlcmVuY2UgaWQgZ2l2ZXMgNDA0IGFuZCBhbiBPcGVyYXRpb25PdXRjb21lCiAgICAgIEdpdmVuIENsaWVudCBpcyBhc2tlZCBmb3IgJGFjY2Vzc1Rva2VuIHdpdGggIkEgU01BUlQgQmFja2VuZCBTZXJ2aWNlcyBhY2Nlc3MgdG9rZW4gZm9yIHRoaXMgc2VydmVyLCBhcyAnQmVhcmVyIDx0b2tlbj4nIChzY29wZXMgc3lzdGVtL0RvY3VtZW50UmVmZXJlbmNlLnJzLCBzeXN0ZW0vQmluYXJ5LnIsIHN5c3RlbS9QYXRpZW50LnJzKSIKICAgICAgQW5kIHNldCBoZWFkZXIgIkF1dGhvcml6YXRpb24iIHRvICRhY2Nlc3NUb2tlbgogICAgICBXaGVuIENsaWVudCBnZXRzIGZyb20gR3JvdXBlZFByb3ZpZGVyIGF0ICIvRG9jdW1lbnRSZWZlcmVuY2Uvb3RiLW5vLXN1Y2gtZG9jdW1lbnQtMDAwIiBhcyAkbWlzc2luZwogICAgICBUaGVuICRyZXNwb25zZS5zdGF0dXMgc2hvdWxkIGJlIDQwNAogICAgICBBbmQgJG1pc3NpbmcgYXQgIk9wZXJhdGlvbk91dGNvbWUuaXNzdWUuZXhpc3RzKCkiIHNob3VsZCBiZSB0cnVlCgogIFJ1bGU6IFJldHJpZXZlIERvY3VtZW50IFtJVEktNjhdCgogICAgQGNvdmVyczpCaW5hcnkucmVhZAogICAgIyBGaXh0dXJlIGNvbnRyYWN0OiBmaXh0dXJlcy9wcm92aWRlci12MS9tYW5pZmVzdC5qc29uLCBjYXNlcy5ncnAtMDEwIChpbnB1dCBiaW5kaW5ncyBhbmQgZXhwZWN0ZWQgZGF0YSkuCiAgICBTY2VuYXJpbzogZ3JwLTAxMCBSZWFkIHRoZSBkb2N1bWVudCBjb250ZW50IGFzIGEgQmluYXJ5CiAgICAgIEdpdmVuIENsaWVudCBpcyBhc2tlZCBmb3IgJGFjY2Vzc1Rva2VuIHdpdGggIkEgU01BUlQgQmFja2VuZCBTZXJ2aWNlcyBhY2Nlc3MgdG9rZW4gZm9yIHRoaXMgc2VydmVyLCBhcyAnQmVhcmVyIDx0b2tlbj4nIChzY29wZXMgc3lzdGVtL0RvY3VtZW50UmVmZXJlbmNlLnJzLCBzeXN0ZW0vQmluYXJ5LnIsIHN5c3RlbS9QYXRpZW50LnJzKSIKICAgICAgQW5kIENsaWVudCBpcyBhc2tlZCBmb3IgJGJpbmFyeUlkIHdpdGggIlRoZSBsb2dpY2FsIGlkIG9mIHRoZSByZWZlcmVuY2UgQmluYXJ5IG9uIHRoZSBzZXJ2ZXIgKHRoZSBmaXh0dXJlIGRvY3VtZW50LCBjb250ZW50IHR5cGUgdGV4dC9wbGFpbikiCiAgICAgIEFuZCBzZXQgaGVhZGVyICJBdXRob3JpemF0aW9uIiB0byAkYWNjZXNzVG9rZW4KICAgICAgIyBUaGUgcmF3IGRvY3VtZW50IGlzIHJlcXVlc3RlZCBieSBpdHMgbWVkaWEgdHlwZS4gQSBzZXJ2ZXIgdGhhdCBpZ25vcmVzIEFjY2VwdCBhbmQgYW5zd2VycyB3aXRoIHRoZSBGSElSIEJpbmFyeSByZXNvdXJjZSwgb3Igd2l0aCBubyBjb250ZW50LCBmYWlscyBoZXJlLgogICAgICBBbmQgc2V0IGhlYWRlciAiQWNjZXB0IiB0byAidGV4dC9wbGFpbiIKICAgICAgV2hlbiBDbGllbnQgZ2V0cyBmcm9tIEdyb3VwZWRQcm92aWRlciBhdCAiL0JpbmFyeS8iIHdpdGggaWQgJGJpbmFyeUlkIGFzICRiaW5hcnkKICAgICAgVGhlbiAkcmVzcG9uc2Uuc3RhdHVzIHNob3VsZCBiZSAyMDAKICAgICAgQW5kICRyZXNwb25zZS5oZWFkZXJzLkNvbnRlbnQtVHlwZSBzaG91bGQgY29udGFpbiAidGV4dC9wbGFpbiIKICAgICAgQW5kICRyZXNwb25zZS5ib2R5IHNob3VsZCBjb250YWluICJFVSBBUEkgdGFyZ2V0IGRvY3VtZW50LiBTeW50aGV0aWMgdGVzdCBkYXRhIG9ubHkuIgoKICBSdWxlOiBQYXRpZW50IGxvb2t1cCAoUERRbSBJVEktNzgpIGlzIGF2YWlsYWJsZSB3aGVuIHRoZSBzZXJ2ZXIgb2ZmZXJzIGl0CgogICAgIyBQYXRpZW50IGlzIFNIT1VMRCBvbiB0aGUgQWNjZXNzIFByb3ZpZGVyOiBhIHNlcnZlciB0aGF0IGRvZXMgbm90IG9mZmVyIGl0CiAgICAjIGFuc3dlcnMgNDA0IG9yIDUwMSBhbmQgdGhlc2Ugc2NlbmFyaW9zIGFyZSBub3QgYXBwbGljYWJsZSB0byBpdC4gQSBzZXJ2ZXIKICAgICMgdGhhdCBkb2VzIG9mZmVyIGl0IFNIQUxMIHN1cHBvcnQgYWxsIG9mIHRoZSBzZWFyY2ggcGFyYW1ldGVycyBiZWxvdy4KICAgIEBjb3ZlcnM6UGF0aWVudC5yZWFkLFBhdGllbnQuc2VhcmNoLXR5cGUsUGF0aWVudC5zZWFyY2guaWRlbnRpZmllcgogICAgIyBGaXh0dXJlIGNvbnRyYWN0OiBmaXh0dXJlcy9wcm92aWRlci12MS9tYW5pZmVzdC5qc29uLCBjYXNlcy5ncnAtMDExIChpbnB1dCBiaW5kaW5ncyBhbmQgZXhwZWN0ZWQgZGF0YSkuCiAgICBTY2VuYXJpbzogZ3JwLTAxMSBTZWFyY2ggUGF0aWVudCBieSBpZGVudGlmaWVyCiAgICAgIEdpdmVuIENsaWVudCBpcyBhc2tlZCBmb3IgJGFjY2Vzc1Rva2VuIHdpdGggIkEgU01BUlQgQmFja2VuZCBTZXJ2aWNlcyBhY2Nlc3MgdG9rZW4gZm9yIHRoaXMgc2VydmVyLCBhcyAnQmVhcmVyIDx0b2tlbj4nIChzY29wZXMgc3lzdGVtL0RvY3VtZW50UmVmZXJlbmNlLnJzLCBzeXN0ZW0vQmluYXJ5LnIsIHN5c3RlbS9QYXRpZW50LnJzKSIKICAgICAgQW5kIENsaWVudCBpcyBhc2tlZCBmb3IgJHBhdGllbnRJZGVudGlmaWVyIHdpdGggIlRoZSBpZGVudGlmaWVyIChzeXN0ZW18dmFsdWUpIG9mIHRoZSByZWZlcmVuY2UgcGF0aWVudCB3aG8gaGFzIGRvY3VtZW50cyBvbiB0aGUgc2VydmVyIgogICAgICBBbmQgQ2xpZW50IGlzIGFza2VkIGZvciAkcGF0aWVudElkIHdpdGggIlRoZSBsb2dpY2FsIGlkIG9mIHRoZSByZWZlcmVuY2UgcGF0aWVudCBvbiB0aGUgc2VydmVyIgogICAgICBBbmQgc2V0IGhlYWRlciAiQXV0aG9yaXphdGlvbiIgdG8gJGFjY2Vzc1Rva2VuCiAgICAgIFdoZW4gQ2xpZW50IGdldHMgZnJvbSBHcm91cGVkUHJvdmlkZXIgYXQgIi9QYXRpZW50P2lkZW50aWZpZXI9IiB3aXRoIGlkICRwYXRpZW50SWRlbnRpZmllciBhcyAkcGF0aWVudHMKICAgICAgVGhlbiAkcmVzcG9uc2Uuc3RhdHVzIHNob3VsZCBiZSAyMDAKICAgICAgQW5kICRwYXRpZW50cyBhdCAiQnVuZGxlLnR5cGUiIHNob3VsZCBiZSAic2VhcmNoc2V0IgogICAgICBBbmQgJHBhdGllbnRzIGF0ICJCdW5kbGUuZW50cnkucmVzb3VyY2Uub2ZUeXBlKFBhdGllbnQpLmNvdW50KCkgPj0gMSIgc2hvdWxkIGJlIHRydWUKICAgICAgQW5kICRwYXRpZW50cyBhdCAiQnVuZGxlLmVudHJ5LnJlc291cmNlLm9mVHlwZShQYXRpZW50KS5pZC5kaXN0aW5jdCgpLnNpbmdsZSgpIiBzaG91bGQgYmUgIiRwYXRpZW50SWQiCiAgICAgIEFuZCAkcGF0aWVudHMgc2hvdWxkIGNvbmZvcm0gdG8gImh0dHA6Ly9obDcub3JnL2ZoaXIvU3RydWN0dXJlRGVmaW5pdGlvbi9CdW5kbGUiIGlnbm9yaW5nIHNsaWNpbmcgZXJyb3JzCgogICAgQGNvdmVyczpQYXRpZW50LnJlYWQsUGF0aWVudC5zZWFyY2guaWQKICAgICMgRml4dHVyZSBjb250cmFjdDogZml4dHVyZXMvcHJvdmlkZXItdjEvbWFuaWZlc3QuanNvbiwgY2FzZXMuZ3JwLTAxMiAoaW5wdXQgYmluZGluZ3MgYW5kIGV4cGVjdGVkIGRhdGEpLgogICAgU2NlbmFyaW86IGdycC0wMTIgUmVhZCBQYXRpZW50IGJ5IGlkIGFuZCBjb25mb3JtIHRvIHBhdGllbnQtZXUtY29yZQogICAgICBHaXZlbiBGSElSVmFsaWRhdG9yIGlzIGxvYWRlZCB3aXRoIHBhY2thZ2UgImhsNy5maGlyLmV1LmhlYWx0aC1kYXRhLWFwaSMxLjAuMC1iYWxsb3QiCiAgICAgIEFuZCBDbGllbnQgaXMgYXNrZWQgZm9yICRhY2Nlc3NUb2tlbiB3aXRoICJBIFNNQVJUIEJhY2tlbmQgU2VydmljZXMgYWNjZXNzIHRva2VuIGZvciB0aGlzIHNlcnZlciwgYXMgJ0JlYXJlciA8dG9rZW4+JyAoc2NvcGVzIHN5c3RlbS9Eb2N1bWVudFJlZmVyZW5jZS5ycywgc3lzdGVtL0JpbmFyeS5yLCBzeXN0ZW0vUGF0aWVudC5ycykiCiAgICAgIEFuZCBDbGllbnQgaXMgYXNrZWQgZm9yICRwYXRpZW50SWQgd2l0aCAiVGhlIGxvZ2ljYWwgaWQgb2YgdGhlIHJlZmVyZW5jZSBwYXRpZW50IG9uIHRoZSBzZXJ2ZXIiCiAgICAgIEFuZCBzZXQgaGVhZGVyICJBdXRob3JpemF0aW9uIiB0byAkYWNjZXNzVG9rZW4KICAgICAgV2hlbiBDbGllbnQgZ2V0cyBmcm9tIEdyb3VwZWRQcm92aWRlciBhdCAiL1BhdGllbnQvIiB3aXRoIGlkICRwYXRpZW50SWQgYXMgJHBhdGllbnQKICAgICAgVGhlbiAkcmVzcG9uc2Uuc3RhdHVzIHNob3VsZCBiZSAyMDAKICAgICAgQW5kICRwYXRpZW50IHNob3VsZCBjb25mb3JtIHRvICJodHRwOi8vaGw3LmV1L2ZoaXIvYmFzZS9TdHJ1Y3R1cmVEZWZpbml0aW9uL3BhdGllbnQtZXUtY29yZSIgaWdub3Jpbmcgc2xpY2luZyBlcnJvcnMKCiAgICBAY292ZXJzOlBhdGllbnQuc2VhcmNoLmZhbWlseSxQYXRpZW50LnNlYXJjaC5naXZlbixQYXRpZW50LnNlYXJjaC5iaXJ0aGRhdGUsUGF0aWVudC5zZWFyY2guZ2VuZGVyCiAgICAjIEZpeHR1cmUgY29udHJhY3Q6IGZpeHR1cmVzL3Byb3ZpZGVyLXYxL21hbmlmZXN0Lmpzb24sIGNhc2VzLmdycC0wMTMgKGlucHV0IGJpbmRpbmdzIGFuZCBleHBlY3RlZCBkYXRhKS4KICAgIFNjZW5hcmlvOiBncnAtMDEzIFNlYXJjaCBQYXRpZW50IGJ5IGRlbW9ncmFwaGljcyB0aGUgcmVmZXJlbmNlIHBhdGllbnQgaGFzCiAgICAgIEdpdmVuIENsaWVudCBpcyBhc2tlZCBmb3IgJGFjY2Vzc1Rva2VuIHdpdGggIkEgU01BUlQgQmFja2VuZCBTZXJ2aWNlcyBhY2Nlc3MgdG9rZW4gZm9yIHRoaXMgc2VydmVyLCBhcyAnQmVhcmVyIDx0b2tlbj4nIChzY29wZXMgc3lzdGVtL0RvY3VtZW50UmVmZXJlbmNlLnJzLCBzeXN0ZW0vQmluYXJ5LnIsIHN5c3RlbS9QYXRpZW50LnJzKSIKICAgICAgQW5kIENsaWVudCBpcyBhc2tlZCBmb3IgJHBhdGllbnRJZCB3aXRoICJUaGUgbG9naWNhbCBpZCBvZiB0aGUgcmVmZXJlbmNlIHBhdGllbnQgb24gdGhlIHNlcnZlciIKICAgICAgQW5kIHNldCBoZWFkZXIgIkF1dGhvcml6YXRpb24iIHRvICRhY2Nlc3NUb2tlbgogICAgICBXaGVuIENsaWVudCBnZXRzIGZyb20gR3JvdXBlZFByb3ZpZGVyIGF0ICIvUGF0aWVudC8iIHdpdGggaWQgJHBhdGllbnRJZCBhcyAkcmVmCiAgICAgIFRoZW4gJHJlc3BvbnNlLnN0YXR1cyBzaG91bGQgYmUgMjAwCiAgICAgIEFuZCBleHRyYWN0ICIvbmFtZS8wL2ZhbWlseSIgZnJvbSAkcmVzcG9uc2UuYm9keSBhcyAkZmFtaWx5CiAgICAgIEFuZCBleHRyYWN0ICIvZ2VuZGVyIiBmcm9tICRyZXNwb25zZS5ib2R5IGFzICRnZW5kZXIKICAgICAgV2hlbiBDbGllbnQgZ2V0cyBmcm9tIEdyb3VwZWRQcm92aWRlciBhdCAiL1BhdGllbnQ/ZmFtaWx5PSIgd2l0aCBpZCAkZmFtaWx5IGFzICRieUZhbWlseQogICAgICBUaGVuICRyZXNwb25zZS5zdGF0dXMgc2hvdWxkIGJlIDIwMAogICAgICBBbmQgJGJ5RmFtaWx5IGF0ICJCdW5kbGUuZW50cnkucmVzb3VyY2Uub2ZUeXBlKFBhdGllbnQpLmV4aXN0cygpIiBzaG91bGQgYmUgdHJ1ZQogICAgICBBbmQgJGJ5RmFtaWx5IGF0ICJCdW5kbGUuZW50cnkucmVzb3VyY2Uub2ZUeXBlKFBhdGllbnQpLmlkLmpvaW4oJywnKSIgc2hvdWxkIGNvbnRhaW4gJHBhdGllbnRJZAogICAgICBXaGVuIENsaWVudCBnZXRzIGZyb20gR3JvdXBlZFByb3ZpZGVyIGF0ICIvUGF0aWVudD9nZW5kZXI9IiB3aXRoIGlkICRnZW5kZXIgYXMgJGJ5R2VuZGVyCiAgICAgIFRoZW4gJHJlc3BvbnNlLnN0YXR1cyBzaG91bGQgYmUgMjAwCiAgICAgIEFuZCAkYnlHZW5kZXIgYXQgIkJ1bmRsZS5lbnRyeS5yZXNvdXJjZS5vZlR5cGUoUGF0aWVudCkuZXhpc3RzKCkiIHNob3VsZCBiZSB0cnVlCiAgICAgIEFuZCAkYnlHZW5kZXIgYXQgIkJ1bmRsZS5lbnRyeS5yZXNvdXJjZS5vZlR5cGUoUGF0aWVudCkuaWQuam9pbignLCcpIiBzaG91bGQgY29udGFpbiAkcGF0aWVudElkCg=="
+}</code></pre>
+
+
+  <!-- insert notes if present -->
+  
+
+
+
+</div>
+        </div>  <!-- /inner-wrapper -->
+      </div>  <!-- /row -->
+    </div>  <!-- /container -->
+  </div>  <!-- /segment-content -->
+
+  <script type="text/javascript" src="assets/js/jquery.js"> </script>     <!-- note keep space here, otherwise it will be transformed to empty tag -> fails -->
+  <script type="text/javascript" src="assets/js/jquery-ui.min.js"> </script>
+  <script type="text/javascript" src="assets/js/flags.js"> </script>
+
+  <script type="text/javascript" src="assets/js/window-hash.js"> </script>
+  <script type="text/javascript" src="assets/js/togglechanges.js"> </script>
+  <script type="text/javascript" src="assets/js/requirements-table.js"> </script>
+  <a name="bottom"> </a>
+  <div id="segment-footer" igtool="footer" class="segment">  <!-- segment-footer -->
+    <div class="container" data-fhir="generated">  <!-- container -->
+
+      <div class="inner-wrapper">
+        <p>
+
+
+
+          IG © 2026+ <a style="color:var(--footer-hyperlink-text-color)" href="https://trifork.com">Jens Kristian Villadsen</a>.  
+          Package hl7.fhir.eu.health-data-api.test#0.1.0 based on <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/6.0.0-ballot5/">FHIR 6.0.0-snapshot1</a>.
+          Generated 
+  <span title="2026-11-23 07:49:00 +0000">
+    2026-11-23
+  </span>
+
+          <br/>
+          <span style="color: var(--footer-highlight-text-color)">
+            <div style="color: #333333">
+
+  Links: <a style="color: #81BEF7" href="toc.html">Table of Contents</a> |
+  <a style="color: #81BEF7" href="../qa.html">QA Report</a>
+  <!--
+                 <a style="color: #81BEF7" target="_blank" href="http://example.com/fhir/hl7.fhir.eu.health-data-api.test/history.html">Version History <img alt="external" style="vertical-align: baseline" src="external.png"/></a></a> |
+-->
+  <a style="color: #81BEF7" rel="license" href="http://hl7.org/fhir/6.0.0-ballot5/license.html"><img style="border-style: none;"
+      alt="CC0" src="cc0.png" /></a>
+  <!--<a style="color: #81BEF7" href="todo.html">Search</a> | -->
+  <a style="color: #81BEF7" target="_blank" href="http://jira.hl7.org">Propose a change<img alt="external"
+      style="vertical-align: baseline" src="external.png" /></a>
+
+  <div>
+  </div>
+
+</div>
+          </span>
+        </p>
+      </div>  <!-- /inner-wrapper -->
+    </div>  <!-- /container -->
+  </div>  <!-- /segment-footer -->
+  
+  <div id="segment-post-footer" class="segment hidden">  <!-- segment-post-footer -->
+    <div class="container">  <!-- container -->
+    </div>  <!-- /container -->
+  </div>  <!-- /segment-post-footer -->
+
+  <!-- JS and analytics only. -->
+  <!-- Bootstrap core JavaScript
+  ================================================== -->
+  <!-- Placed at the end of the document so the pages load faster -->
+  <script type="text/javascript" src="assets/js/bootstrap.min.js"> </script>
+  <script type="text/javascript" src="assets/js/respond.min.js"> </script>
+  <script type="text/javascript" src="assets/js/anchor.min.js"> </script>
+  <script type="text/javascript" src="assets/js/clipboard.min.js"> </script>
+  <script type="text/javascript" src="assets/js/clipboard-btn.js"> </script>
+  <script type="text/javascript" src="assets/js/anchor-hover.js"> </script>
+  <!-- Analytics Below
+  ================================================== -->
+  </body>
+</html>
+
